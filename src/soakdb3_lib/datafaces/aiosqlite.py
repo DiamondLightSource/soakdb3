@@ -326,6 +326,10 @@ class Aiosqlite(Thing):
         The filename's path should be a subdirectory (no leading slash).
         """
 
+        # We don't really need the database itself, since all the data rows are provided as arguments.
+        # However, this sets up the csv_directory for this visit.
+        await self.establish_database_connection(visitid)
+
         # Get the csv directory from the specification.
         csv_directory = self.__cache_cvs_directories.get(visitid)
         if csv_directory is None:

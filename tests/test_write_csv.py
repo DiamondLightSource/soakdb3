@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 
 # ----------------------------------------------------------------------------------------
 class TestWriteCsv:
-    def test_dataface_laptop(self, constants, logging_setup, output_directory):
+    def test(self, constants, logging_setup, output_directory):
         """ """
 
         configuration_file = "tests/configurations/laptop.yaml"

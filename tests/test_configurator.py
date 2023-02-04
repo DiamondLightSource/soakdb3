@@ -93,14 +93,15 @@ class TestGoodConfigurationEnv:
     def test(self, constants, logging_setup, output_directory):
         """ """
 
-        with open("good_config1.yaml", "w") as stream:
+        configuration_filename = f"{output_directory}/good_config1.yaml"
+        with open(configuration_filename, "w") as stream:
             stream.write("")
 
         os.makedirs(f"{output_directory}/good_data_dir1")
 
         # ---------------------------------------------------
         environ = {
-            Envvar.SOAKDB_CONFIGFILE: "good_config1.yaml",
+            Envvar.SOAKDB_CONFIGFILE: configuration_filename,
         }
         GoodConfigurationEnvTester().main(constants, environ, output_directory)
 
