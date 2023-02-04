@@ -1,0 +1,90 @@
+# ********** Please don't edit this file!
+# ********** It has been generated automatically by dae_devops version 0.4.1.dev0+g5d50877.d20230202.
+# ********** For repository_name soakdb3
+
+variables:
+  # I put the package_pip artifacts int his place just until I can use the corporate internal pipserver.
+  # Maybe /dls_sw/work/python3/RHEL7-x86_64/distributions would be a better place?
+  PIP_FIND_LINKS: "/dls_sw/apps/bxflow/artifacts"
+
+default:
+  tags:
+    # Argus is the production Kubernetes.
+    - argus
+  image:
+    # Use official language image.
+    name: python:3.9
+  before_script:
+    - df
+    - echo $PIP_FIND_LINKS
+    - pip install -e .[dev,docs]
+    # -----
+    - git config --global credential.helper "/bin/bash /git_creds.sh"
+    - echo '#!/usr/bin/env bash' > /git_creds.sh
+    - echo "sleep 1" >> /git_creds.sh
+    - echo "echo username=gitlab-ci-token" >> /git_creds.sh
+    - echo "echo password=$CI_JOB_TOKEN" >> /git_creds.sh
+    # -----
+    - make -f .dae-devops/Makefile prepare_git_dependencies
+
+stages:
+  - validate
+  - package
+  # Disabling the publish part until a runner has a place to publish to.
+  # - publish
+
+# ---------------------------------------------------------------------
+# The validate stage makes sure code is ready to package and release.
+
+validate_pre_commit:
+  stage: validate
+  script:
+    - make -f .dae-devops/Makefile validate_pre_commit
+
+validate_mypy:
+  stage: validate
+  script:
+    - make -f .dae-devops/Makefile validate_mypy
+
+validate_pytest:
+  stage: validate
+  script:
+    - make -f .dae-devops/Makefile validate_pytest
+
+validate_docs:
+  stage: validate
+  script:
+    - make -f .dae-devops/Makefile validate_docs
+  artifacts:
+    paths:
+      - build/html
+
+# ---------------------------------------------------------------------
+# The pip state packages and publishes for pip.
+
+package_pip:
+  stage: package
+  script:
+    - make -f .dae-devops/Makefile package_pip
+  artifacts:
+    paths:
+      - dist/*
+# ---------------------------------------------------------------------
+# The publish stage publishes stuff for general consumption.
+# Will use artifacts from previous stages.
+
+# Disabling the publish part until a runner has a place to publish to.
+# It can be done manually from the command line using the make commands.
+# publish_pip:
+#   stage: publish
+#   script:
+#     # The package_pip artifacts are in the dist folder.
+#     - make -f .dae-devops/Makefile publish_pip
+
+# publish_docs:
+#   stage: publish
+#   script:
+#     # The validate_docs artifacts are in the build/html folder.
+#     - make -f .dae-devops/Makefile publish_docs
+
+# dae_devops_fingerprint 9185a3c0ac5dd71eb0ffd83ddaf7f6ee

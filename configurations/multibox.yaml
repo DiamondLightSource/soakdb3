@@ -1,0 +1,44 @@
+type: soakdb3_lib.contexts.classic
+
+logging_settings:
+    console:
+        enabled: True
+        verbose: True
+    logfile:
+        enabled: True
+        directory: soakdb3
+    graypy:
+        enabled: False
+        host: 172.23.7.128
+        port: 12201
+        protocol: UDP
+
+# The external access bits.
+external_access_bits:
+    dataface_server: &SOAKDB3_DATAFACE_SERVER http://*:27422
+    dataface_client: &SOAKDB3_DATAFACE_CLIENT http://localhost:27422
+
+# The dataface client/server composite.
+dataface_specification:
+    type: "soakdb3_lib.datafaces.aiohttp"
+    type_specific_tbd:
+        # The remote dataface server access.
+        aiohttp_specification:
+            server: *SOAKDB3_DATAFACE_SERVER
+            client: *SOAKDB3_DATAFACE_CLIENT
+        # The local implementation of the dataface.
+        actual_dataface_specification:
+            type: "soakdb3_lib.datafaces.aiosqlite"
+            type_specific_tbd:
+                vistid_mappings:
+                    - action: "regex_replace"
+                      pattern: "^[Cc][:]"
+                      replace: ""
+                    - action: "regex_replace"
+                      pattern: "^[Yy][:]"
+                      replace: "/dls/labxchem/"
+                database:
+                    type: "soakdb3_lib.databases.aiosqlite"
+                    filename: "set by code"
+                    backup_directory: "set by code"
+                    log_level: "WARNING"

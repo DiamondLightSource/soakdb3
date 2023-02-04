@@ -1,0 +1,106 @@
+# ********** Please don't edit this file!
+# ********** It has been generated automatically by dae_devops version 0.4.1.dev0+g5d50877.d20230202.
+# ********** For repository_name soakdb3
+
+[build-system]
+requires = ["setuptools>=64", "setuptools_scm[toml]>=6.2", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "soakdb3"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+]
+description = "Replacement for soakdb2, including a new database backend."
+dependencies = ["dls_servbase", "dls_mainiac", "dls_utilpack"]
+dynamic = ["version"]
+license.file = "LICENSE"
+readme = "README.rst"
+requires-python = ">=3.8"
+
+[project.optional-dependencies]
+dev = [
+    "black",
+    "mypy",
+    "flake8-isort",
+    "Flake8-pyproject",
+    "pipdeptree",
+    "pre-commit",
+    "pytest-cov",
+    "pydocstyle[toml]",
+    "tox-direct",
+    "types-mock",
+]
+docs = [
+    "pydata-sphinx-theme>=0.12",
+    "sphinx-argparse",
+    "sphinx-autobuild",
+    "sphinx-copybutton",
+    "sphinx-design",
+    "tox-direct",
+    "nbsphinx",
+    "pandoc",
+    "ipykernel",
+    "h5py",
+    "matplotlib",
+]
+
+[project.scripts]
+soakdb3 = "soakdb3_lib.__main__:main"
+"soakdb3.cli" = "soakdb3_cli.main:main"
+
+[project.urls]
+GitLab = "https://gitlab.diamond.ac.uk/xchem/soakdb3"
+
+[[project.authors]] # Further authors may be added by duplicating this section
+email = "david.erb@diamond.ac.uk"
+name = "David Erb"
+
+
+[tool.setuptools_scm]
+write_to = "src/soakdb3_lib/_version.py"
+
+[tool.mypy]
+ignore_missing_imports = true # Ignore missing stubs in imported modules
+
+[tool.isort]
+float_to_top = true
+profile = "black"
+
+[tool.flake8]
+extend-ignore = [
+    "E501", # Allow long lines that black doesn't fix.
+    "E203", # See https://github.com/PyCQA/pycodestyle/issues/373
+    "F811", # support typing.overload decorator
+    "F722", # allow Annotated[typ, some_func("some string")]
+]
+max-line-length = 88 # Respect black's line length (default 88),
+exclude = [".tox", "venv"]
+
+
+[tool.pytest.ini_options]
+# Run pytest with all our checkers, and don't spam us with massive tracebacks on error
+addopts = "    --tb=native -vv --doctest-modules --doctest-glob=\"*.rst\"\n    --cov=soakdb3_lib --cov-report term --cov-report xml:cov.xml\n    "
+# https://iscinumpy.gitlab.io/post/bound-version-constraints/#watch-for-warnings
+filterwarnings = "error"
+# Doctest python code in docs, python code in src docstrings, test functions in tests
+testpaths = "docs src tests"
+
+[tool.coverage.run]
+data_file = "/tmp/soakdb3_lib.coverage"
+
+[tool.coverage.paths]
+# Tests are run from installed location, map back to the src directory
+source = ["src", "**/site-packages/"]
+
+# tox must currently be configured via an embedded ini string
+# See: https://github.com/tox-dev/tox/issues/999
+[tool.tox]
+legacy_tox_ini = "[tox]\nskipsdist=True\n\n[testenv:{pre-commit,mypy,pytest,docs}]\n# Don't create a virtualenv for the command, requires tox-direct plugin\ndirect = True\npassenv = *\nallowlist_externals = \n    pytest \n    pre-commit\n    mypy\n    sphinx-build\n    sphinx-autobuild\ncommands =\n    pytest: pytest {posargs}\n    mypy: mypy src tests {posargs}\n    pre-commit: pre-commit run --all-files {posargs}\n    docs: sphinx-{posargs:build -EW --keep-going} -T docs build/html\n"
+
+# dae_devops_fingerprint 6974b9e79e6a639a35738987f9a9ed3a

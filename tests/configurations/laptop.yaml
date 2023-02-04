@@ -1,0 +1,39 @@
+type: soakdb3_lib.contexts.classic
+
+logging_settings:
+    console:
+        enabled: True
+        verbose: True
+    logfile:
+        enabled: True
+        directory: ${output_directory}/logfile.log
+    graypy:
+        enabled: False
+        host: 172.23.7.128
+        port: 12201
+        protocol: UDP
+
+# The external access bits.
+external_access_bits:
+    dataface_port: &DATAFACE_PORT 22422
+
+# The dataface client/server composite.
+dataface_specification:
+    type: "soakdb3_lib.datafaces.aiohttp"
+    type_specific_tbd:
+        # The remote dataface server access.
+        aiohttp_specification:
+            server_host: "*"
+            client_host: "127.0.0.1"
+            port: *DATAFACE_PORT
+        # The local implementation of the dataface.
+        actual_dataface_specification:
+            type: "soakdb3_lib.datafaces.aiosqlite"
+            type_specific_tbd:
+                database:
+                    type: "soakdb3_lib.databases.aiosqlite"
+                    filename: "set by code"
+                    backup_directory: "set by code"
+                    log_level: "WARNING"
+    context:
+        start_as: process

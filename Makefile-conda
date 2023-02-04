@@ -1,0 +1,65 @@
+# Get version from the value set by setuptools_scm.
+VERSION = $(shell soakdb3 --version)
+
+# Shell to use instead of /bin/sh.
+SHELL := /bin/bash
+
+# Run all commands in the target in a single shell.
+.ONESHELL:
+
+# ------------------------------------------------------------------
+# Install into conda.
+CONDA_PREFIX = /dls_sw/apps/xchem/soakdb3/conda/envs/soakdb3/$(VERSION)
+PYTHON_VERSION = 3.8
+CONDA_ACTIVATE = source $$(conda info --base)/etc/profile.d/conda.sh ; conda activate ; conda activate
+PIP_FIND_LINKS = /dls_sw/apps/bxflow/artifacts
+
+# Create the conda environment for this version.
+conda_create:
+	module load mamba && \
+	mamba create -y --prefix $(CONDA_PREFIX) python=$(PYTHON_VERSION)
+
+# Install the package into the conda environment.
+conda_install:
+	$(CONDA_ACTIVATE) $(CONDA_PREFIX)
+	export PIP_FIND_LINKS=$(PIP_FIND_LINKS)
+	python3 -m pip install --pre --upgrade .
+
+# Update specific packages from source in the pre-installed conda environment.
+conda_update:
+	$(CONDA_ACTIVATE) $(CONDA_PREFIX)
+	export PIP_FIND_LINKS=$(PIP_FIND_LINKS)
+	python3 -m pip install --pre --upgrade ../soakdb3
+
+# Make this version be the edge version.
+conda_edge:
+	rm -f $(CONDA_PREFIX)/../edge
+	ln -s $(CONDA_PREFIX) $(CONDA_PREFIX)/../edge
+
+# Make this version be the edge version.
+conda_stable:
+	rm -f $(CONDA_PREFIX)/../stable
+	ln -s $(CONDA_PREFIX) $(CONDA_PREFIX)/../stable
+
+# ------------------------------------------------------------------
+# Deployment the current modules for loading.
+MODULE_TARGET ?= /dls_sw/apps/Modules/modulefiles/xchem/soakdb3
+deploy_modules:
+	mkdir -p $(MODULE_TARGET)/$(VERSION)
+	cp modulefiles/* $(MODULE_TARGET)/$(VERSION)
+	rm -f $(MODULE_TARGET)/edge
+	ln -s $(MODULE_TARGET)/$(VERSION)/paths $(MODULE_TARGET)/edge
+	find $(MODULE_TARGET) -type f -exec chmod 664 {} \;
+	find $(MODULE_TARGET) -type d -exec chmod g+s {} \;
+	chgrp -R dls-softinst $(MODULE_TARGET)
+
+deploy_modules_stable:
+	rm -f $(MODULE_TARGET)/stable
+	ln -s $(MODULE_TARGET)/$(VERSION)/paths $(MODULE_TARGET)/stable
+
+# ------------------------------------------------------------------
+# Rsync stuff from local C: drive to shared V: drive. 
+
+rsync:	
+	../kbp43231_scripts/myrsync.py soakdb3
+	

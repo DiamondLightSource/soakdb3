@@ -1,0 +1,49 @@
+#%Module -*- tcl -*-
+
+proc ModulesHelp { } {
+  puts stderr "\tSets up the environment for soakdb3 commands."
+  puts stderr "\tRequires that the BEAMLINE (caps) and visit (not caps) environment variables be defined before the module load."
+}
+
+module-whatis "sets up the environment for soakdb3 commands"
+
+# Get the visit from the environment.
+if { ![info exists ::env(visit)] } {
+  puts stderr "Please assign the visit before the module load."
+  puts stderr "  for example: visit=lb10001-1 module load [module-info name]"
+  exit 1
+}
+set visit $env(visit)
+
+# Find the visit directory on disk.
+set visit_directory [exec find /dls/$beamline/data -maxdepth 2 -name $visit]
+
+if { [llength $visit_directory] == 0 } {
+  puts stderr "Cannot find the visit directory any subdirectory of /dls/$beamline/data."
+  exit 1
+}
+
+puts stderr "[module-info name]: visit directory is $visit_directory"
+
+# The soakdb3 main config file is per-visit.
+setenv BXFLOW_CONFIGFILE $workflows_directory/configurations/multibox.yaml
+
+# The soakdb3 conda environment we want to use.
+set conda_environment_version stable
+set conda_environment /dls_sw/apps/soakdb3/conda/envs/soakdb3/$conda_environment_version
+
+# Function to display versions.
+set soakdb3_about "$conda_environment/bin/python -m soakdb3_cli.main --about"
+set-alias "soakdb3_about" $soakdb3_about
+
+# Function to start all the services.
+set-alias "soakdb3_start" "$conda_environment/bin/python -m soakdb3_cli.main start_services --visit=$visit all"
+
+# Function to tail the log file.
+set-alias "soakdb3_logtail" "tail -f /tmp/logs/soakdb3/logformatter.log"
+
+# Where the soakdb3 python packages are.
+prepend-path	PYTHONPATH		$conda_environment/lib/python3.8/site-packages/
+
+# Display the versions of things.
+puts stdout "$soakdb3_about;"

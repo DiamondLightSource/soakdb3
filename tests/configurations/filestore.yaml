@@ -1,0 +1,42 @@
+type: soakdb3_lib.contexts.classic
+
+visit:
+    directory: /dls/my_beamline/data/2022/my00001-1
+
+# The external access bits.
+external_access_bits:
+    filestore_root: &FILESTORE_DIRECTORY ${output_directory}
+    filestore_scandir: &FILESTORE_SCANDIR /dls/b29/data/2022/cm00001-1
+
+# Explicit file store.
+xchem_be_filestore_specification_explicit:
+    &XCHEM_BE_FILESTORE_SPECIFICATION_EXPLICIT
+    type: soakdb3_lib.xchem_be_filestores.explicit
+    type_specific_tbd:
+        directory: *FILESTORE_DIRECTORY
+        beamline: "b29"
+        visit: "cm00001-1"
+
+# Here testing dynamic import of filestore class.
+xchem_be_filestore_specification_dynamic:
+    &XCHEM_BE_FILESTORE_SPECIFICATION_DYNAMIC
+    type: "src/soakdb3_lib/xchem_be_filestores/explicit.py::Explicit"
+    type_specific_tbd:
+        directory: *FILESTORE_DIRECTORY
+        beamline: "b29"
+        visit: "cm00001-1"
+
+# Scandir file store.
+xchem_be_filestore_specification_scandir:
+    &XCHEM_BE_FILESTORE_SPECIFICATION_SCANDIR
+    type: soakdb3_lib.xchem_be_filestores.scandir
+    type_specific_tbd:
+        scandir: *FILESTORE_SCANDIR
+
+# File store.
+xchem_be_filestore_specification: *XCHEM_BE_FILESTORE_SPECIFICATION_EXPLICIT
+
+# The xchem_be_job.
+xchem_be_job_specification:
+    type: "soakdb3_lib.xchem_be_jobs.standard"
+    label: "unlabeled"

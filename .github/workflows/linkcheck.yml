@@ -1,0 +1,30 @@
+# ********** Please don't edit this file!
+# ********** It has been generated automatically by dae_devops version 0.4.1.dev0+g5d50877.d20230202.
+# ********** For repository_name soakdb3
+
+name: Link Check
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Run weekly to check URL links still resolve
+    - cron: "0 8 * * WED"
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install python packages
+        uses: ./.github/actions/install_requirements
+        with:
+          requirements_file: requirements-dev-3.x.txt
+          install_options: -e .[dev]
+
+      - name: Check links
+        run: tox -e docs build -- -b linkcheck
+
+# dae_devops_fingerprint 98c3d60943f28f5629d4662117eb7366

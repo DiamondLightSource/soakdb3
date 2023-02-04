@@ -1,0 +1,22 @@
+# ********** Please don't edit this file!
+# ********** It has been generated automatically by dae_devops version 0.4.1.dev0+g5d50877.d20230202.
+# ********** For repository_name soakdb3
+
+# To get started with Dependabot version updates, you'll need to specify which
+# package ecosystems to update and where the package manifests are located.
+# Please see the documentation for all configuration options:
+# https://docs.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
+
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+
+# dae_devops_fingerprint d00261b85ce46a9d99c602c16e9e80d9
