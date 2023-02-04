@@ -1,5 +1,5 @@
 # ********** Please don't edit this file!
-# ********** It has been generated automatically by dae_devops version 0.4.1.dev0+g5d50877.d20230202.
+# ********** It has been generated automatically by dae_devops version 0.5.1.
 # ********** For repository_name soakdb3
 
 name: Docs Cleanup CI
@@ -46,4 +46,4 @@ jobs:
           git commit -am "Removing redundant docs version $DOCS_VERSION"
           git push
 
-# dae_devops_fingerprint d7d3d2e09aa5c75b875d6720495cba92
+# dae_devops_fingerprint a7d0d383dfa5ba5da8e29d9091cb675f

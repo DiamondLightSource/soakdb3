@@ -1,16 +1,16 @@
 .. # ********** Please don't edit this file!
-.. # ********** It has been generated automatically by dae_devops version 0.4.1.dev0+g5d50877.d20230202.
+.. # ********** It has been generated automatically by dae_devops version 0.5.1.
 .. # ********** For repository_name soakdb3
 
 Installing
 =======================================================================
 
 
-You will need python 3.8 or later. 
+You will need python 3.9 or later. 
 
-On a Diamond Light Source internal computer, you can achieve Python 3.8 by::
+On a Diamond Light Source internal computer, you can achieve Python 3.9 by::
 
-    $ module load python/3.8
+    $ module load python/3.9
 
 You can check your version of python by typing into a terminal::
 
@@ -40,4 +40,4 @@ You can check the version that has been installed by typing::
     $ soakdb3 --version
     $ soakdb3 --version-json
 
-.. # dae_devops_fingerprint 9711de96b7dee1be37a5adc08f134f01
+.. # dae_devops_fingerprint 164dc67c626cf9505910c3da551571f2

@@ -1,5 +1,5 @@
 # ********** Please don't edit this file!
-# ********** It has been generated automatically by dae_devops version 0.4.1.dev0+g5d50877.d20230202.
+# ********** It has been generated automatically by dae_devops version 0.5.1.
 # ********** For repository_name soakdb3
 
 name: Docs CI
@@ -56,4 +56,4 @@ jobs:
           publish_dir: .github/pages
           keep_files: true
 
-# dae_devops_fingerprint fe47845995ace3636430acd79d9c1d02
+# dae_devops_fingerprint 9d3e4c74f8535654cf6713c2167c3324

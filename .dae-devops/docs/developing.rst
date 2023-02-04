@@ -1,5 +1,5 @@
 .. # ********** Please don't edit this file!
-.. # ********** It has been generated automatically by dae_devops version 0.4.1.dev0+g5d50877.d20230202.
+.. # ********** It has been generated automatically by dae_devops version 0.5.1.
 .. # ********** For repository_name soakdb3
 
 Developing
@@ -13,7 +13,7 @@ Clone the repository::
 
 It is recommended that you install into a virtual environment so this
 installation will not interfere with any existing Python software.
-Make sure to have at least python version 3.8 then::
+Make sure to have at least python version 3.9 then::
 
     $ python3 -m venv /scratch/$USER/myvenv
     $ source /scratch/$USER/myvenv/bin/activate
@@ -36,4 +36,4 @@ If you plan to modify the docs, you will need to::
     
 
 
-.. # dae_devops_fingerprint 15edebaf385cab6a977170f7f93863d2
+.. # dae_devops_fingerprint 75eaf046a7ebaff2d31f1575fe0f8a54

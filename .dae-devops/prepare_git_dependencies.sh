@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # ********** Please don't edit this file!
-# ********** It has been generated automatically by dae_devops version 0.4.1.dev0+g5d50877.d20230202.
+# ********** It has been generated automatically by dae_devops version 0.5.1.
 # ********** For repository_name soakdb3
 
 me=${BASH_SOURCE}
@@ -13,4 +13,4 @@ function __install {
 }
 
 
-# dae_devops_fingerprint df8e2a901d15e29b023b2df0efd9f4b8
+# dae_devops_fingerprint 249cfc8420e4b80b6d34e69f3f44ad50

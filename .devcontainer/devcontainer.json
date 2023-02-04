@@ -1,5 +1,5 @@
 // ********** Please don't edit this file!
-// ********** It has been generated automatically by dae_devops version 0.4.1.dev0+g5d50877.d20230202.
+// ********** It has been generated automatically by dae_devops version 0.5.1.
 // ********** For repository_name soakdb3
 
 // For format details, see https://containers.dev/implementors/json_reference/
@@ -57,4 +57,4 @@
     "postCreateCommand": "pip install -e .[dev]"
 }
 
-// dae_devops_fingerprint f92a406823c27450b42824eb7327ce96
+// dae_devops_fingerprint 0c68458e0553257bb0a4cc501621b979

@@ -1,5 +1,5 @@
 # ********** Please don't edit this file!
-# ********** It has been generated automatically by dae_devops version 0.4.1.dev0+g5d50877.d20230202.
+# ********** It has been generated automatically by dae_devops version 0.5.1.
 # ********** For repository_name soakdb3
 
 name: Code CI
@@ -39,12 +39,12 @@ jobs:
       fail-fast: false
       matrix:
         os: ["ubuntu-latest"] # can add windows-latest, macos-latest
-        python: ["3.9", "3.10", "3.11"]
+        python: ["3.10", "3.11"]
         install: ["-e .[dev,docs]"]
         # Make one version be non-editable to test both paths of version code
         include:
           - os: "ubuntu-latest"
-            python: "3.8"
+            python: "3.9"
             install: ".[dev,docs]"
 
     runs-on: ${{ matrix.os }}
@@ -212,4 +212,4 @@ jobs:
         with:
           password: ${{ secrets.PYPI_TOKEN }}
 
-# dae_devops_fingerprint 043930a15b320fcd4766dcd2100f05c5
+# dae_devops_fingerprint a1b26a806f0616acc87834f49e25790c
