@@ -11,7 +11,7 @@ primary:
     project_scripts:
         soakdb3: "soakdb3_lib.__main__:main"
         soakdb3.cli: "soakdb3_cli.main:main"
-    python_version_at_least: 3.11
+    python_version_at_least: 3.10
     dependencies:
         - type: pypi
           list:

@@ -31,7 +31,7 @@ You can stop them any time by typing ^C.
 
 Now you need to get a copy of the excel spreadsheet and auxiliary files.  Do the following commands on a Windows computer::
 
-    $ copy/r \\cs04r-nas02-05.diamond.ac.uk\dls_sw\apps\xchem\conda\envs\soakdb3\stable\lib\python3.11\site-packages\soakdb3_xls\* Y:\labxchem\data\lb19758\lb19758-64\processing\lab36
+    $ copy/r \\cs04r-nas02-05.diamond.ac.uk\dls_sw\apps\xchem\conda\envs\soakdb3\stable\lib\python3.10\site-packages\soakdb3_xls\* Y:\labxchem\data\lb19758\lb19758-64\processing\lab36
 
 
 You will need to edit the excel configuration file to point

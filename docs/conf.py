@@ -188,7 +188,7 @@ ultimate_replacements = {
     "$" + "{repository_name}": "soakdb3",
     "$" + "{package_name}": "soakdb3_lib",
     "$" + "{git_url}": "None",
-    "$" + "{python_version_at_least}": "3.11",
+    "$" + "{python_version_at_least}": "3.1",
 }
 
 
@@ -197,4 +197,4 @@ def setup(app):
     app.connect("source-read", ultimateReplace)
 
 
-# dae_devops_fingerprint 8e665b8ee5e333a031d0f78d1f7ad517
+# dae_devops_fingerprint 240d703cf524d0fc6ca78c9139863acf

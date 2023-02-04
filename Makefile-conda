@@ -10,7 +10,7 @@ SHELL := /bin/bash
 # ------------------------------------------------------------------
 # Install into conda.
 CONDA_PREFIX = /dls_sw/apps/xchem/soakdb3/conda/envs/soakdb3/$(VERSION)
-PYTHON_VERSION = 3.11
+PYTHON_VERSION = 3.10
 CONDA_ACTIVATE = source $$(conda info --base)/etc/profile.d/conda.sh ; conda activate ; conda activate
 
 # Create the conda environment for this version.

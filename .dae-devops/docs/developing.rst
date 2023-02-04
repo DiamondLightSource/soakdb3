@@ -13,7 +13,7 @@ Clone the repository::
 
 It is recommended that you install into a virtual environment so this
 installation will not interfere with any existing Python software.
-Make sure to have at least python version 3.11 then::
+Make sure to have at least python version 3.1 then::
 
     $ python3 -m venv /scratch/$USER/myvenv
     $ source /scratch/$USER/myvenv/bin/activate
@@ -36,4 +36,4 @@ If you plan to modify the docs, you will need to::
     
 
 
-.. # dae_devops_fingerprint 963bb0aaf93eb3fd6f3ef51a7ca05201
+.. # dae_devops_fingerprint 87aad11868414e763f829b6151c2f798

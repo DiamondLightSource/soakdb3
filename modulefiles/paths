@@ -25,7 +25,7 @@ set-alias "soakdb3_start" "$conda_environment/bin/python -m soakdb3_cli.main sta
 set-alias "soakdb3_logtail" "tail -f /tmp/logs/soakdb3/logformatter.log"
 
 # Where the soakdb3 python packages are.
-prepend-path	PYTHONPATH		$conda_environment/lib/python3.11/site-packages/
+prepend-path	PYTHONPATH		$conda_environment/lib/python3.10/site-packages/
 
 # Display the versions of things.
 puts stdout "$soakdb3_about;"

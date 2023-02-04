@@ -6,11 +6,11 @@ Installing
 =======================================================================
 
 
-You will need python 3.11 or later. 
+You will need python 3.1 or later. 
 
-On a Diamond Light Source internal computer, you can achieve Python 3.11 by::
+On a Diamond Light Source internal computer, you can achieve Python 3.1 by::
 
-    $ module load python/3.11
+    $ module load python/3.1
 
 You can check your version of python by typing into a terminal::
 
@@ -40,4 +40,4 @@ You can check the version that has been installed by typing::
     $ soakdb3 --version
     $ soakdb3 --version-json
 
-.. # dae_devops_fingerprint 5c7e6fc09416ba561b1af7122be9b8b8
+.. # dae_devops_fingerprint 374c923d7ab015a48dbff61ad6cb39fd
