@@ -9,11 +9,11 @@ If you plan to make change to the code in this repository, you can use the steps
 
 Clone the repository::
 
-    $ git clone https://gitlab.diamond.ac.uk/xchem/soakdb3.git
+    $ git clone None/soakdb3.git
 
 It is recommended that you install into a virtual environment so this
 installation will not interfere with any existing Python software.
-Make sure to have at least python version 3.9 then::
+Make sure to have at least python version 3.11 then::
 
     $ python3 -m venv /scratch/$USER/myvenv
     $ source /scratch/$USER/myvenv/bin/activate
@@ -36,4 +36,4 @@ If you plan to modify the docs, you will need to::
     
 
 
-.. # dae_devops_fingerprint 75eaf046a7ebaff2d31f1575fe0f8a54
+.. # dae_devops_fingerprint 963bb0aaf93eb3fd6f3ef51a7ca05201

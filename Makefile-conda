@@ -10,7 +10,7 @@ SHELL := /bin/bash
 # ------------------------------------------------------------------
 # Install into conda.
 CONDA_PREFIX = /dls_sw/apps/xchem/soakdb3/conda/envs/soakdb3/$(VERSION)
-PYTHON_VERSION = 3.8
+PYTHON_VERSION = 3.11
 CONDA_ACTIVATE = source $$(conda info --base)/etc/profile.d/conda.sh ; conda activate ; conda activate
 PIP_FIND_LINKS = /dls_sw/apps/bxflow/artifacts
 

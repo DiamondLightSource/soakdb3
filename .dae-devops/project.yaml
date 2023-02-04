@@ -1,19 +1,21 @@
 # Primary information needed for devops.
 primary:
     repository_name: soakdb3
-    package_name: soakdb3_lib
+    package_name: soakdb3
     one_line_description: "Replacement for soakdb2, including a new database backend."
     author:
         name: David Erb
         email: david.erb@diamond.ac.uk
     project_urls:
-        GitLab: https://gitlab.diamond.ac.uk/xchem
+        github: https://github.com/DiamondLightSource
     project_scripts:
         soakdb3: "soakdb3_lib.__main__:main"
         soakdb3.cli: "soakdb3_cli.main:main"
+    python_version_at_least: 3.11
     dependencies:
         - type: pypi
           list:
               - dls_servbase
+              - dls_normsql
               - dls_mainiac
               - dls_utilpack

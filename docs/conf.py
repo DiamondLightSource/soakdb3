@@ -12,7 +12,7 @@ from subprocess import check_output
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
 from sphinx.domains.python import PythonDomain
 
-import soakdb3_lib
+import soakdb3
 
 # -- General configuration ------------------------------------------------
 
@@ -20,7 +20,7 @@ import soakdb3_lib
 project = "soakdb3"
 
 # The full version, including alpha/beta/rc tags.
-release = soakdb3_lib.__version__
+release = soakdb3.__version__
 
 # The short X.Y version.
 if "+" in release:
@@ -150,7 +150,7 @@ html_theme_options = dict(
     logo=dict(
         text=project,
     ),
-    gitlab_url="https://gitlab.diamond.ac.uk/xchem/soakdb3",
+    gitlab_url="None/soakdb3",
     icon_links=[],
     navbar_end=["theme-switcher", "icon-links"],
 )
@@ -186,9 +186,9 @@ def ultimateReplace(app, docname, source):
 # It will allow the ${token} replacement in the rst documents.
 ultimate_replacements = {
     "$" + "{repository_name}": "soakdb3",
-    "$" + "{package_name}": "soakdb3_lib",
-    "$" + "{git_url}": "https://gitlab.diamond.ac.uk/xchem",
-    "$" + "{python_version_at_least}": "3.9",
+    "$" + "{package_name}": "soakdb3",
+    "$" + "{git_url}": "None",
+    "$" + "{python_version_at_least}": "3.11",
 }
 
 
@@ -197,4 +197,4 @@ def setup(app):
     app.connect("source-read", ultimateReplace)
 
 
-# dae_devops_fingerprint b20d567131a3ec9567874691a459ca33
+# dae_devops_fingerprint f55a233ddf672a5ff62a447ba543c01d

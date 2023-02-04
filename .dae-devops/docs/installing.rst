@@ -6,11 +6,11 @@ Installing
 =======================================================================
 
 
-You will need python 3.9 or later. 
+You will need python 3.11 or later. 
 
-On a Diamond Light Source internal computer, you can achieve Python 3.9 by::
+On a Diamond Light Source internal computer, you can achieve Python 3.11 by::
 
-    $ module load python/3.9
+    $ module load python/3.11
 
 You can check your version of python by typing into a terminal::
 
@@ -32,7 +32,7 @@ You can now use ``pip`` to install the library and its dependencies::
 If you require a feature that is not currently released you can also install
 from git::
 
-    $ python3 -m pip install git+https://gitlab.diamond.ac.uk/xchem/soakdb3.git
+    $ python3 -m pip install git+None/soakdb3.git
 
 The library should now be installed and the commandline interface on your path.
 You can check the version that has been installed by typing::
@@ -40,4 +40,4 @@ You can check the version that has been installed by typing::
     $ soakdb3 --version
     $ soakdb3 --version-json
 
-.. # dae_devops_fingerprint 164dc67c626cf9505910c3da551571f2
+.. # dae_devops_fingerprint 5c7e6fc09416ba561b1af7122be9b8b8

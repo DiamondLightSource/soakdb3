@@ -12,5 +12,5 @@ XChem replacement for soakdb2, including a new database backend.
 Documentation
 -----------------------------------------------------------------------
 
-See http://www.cs.diamond.ac.uk/reports/gitlab-ci/soakdb3/index.html for more detailed documentation.
+See https://diamondlightsource.github.io/soakdb3 for more detailed documentation.
 
