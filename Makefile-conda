@@ -12,7 +12,6 @@ SHELL := /bin/bash
 CONDA_PREFIX = /dls_sw/apps/xchem/soakdb3/conda/envs/soakdb3/$(VERSION)
 PYTHON_VERSION = 3.11
 CONDA_ACTIVATE = source $$(conda info --base)/etc/profile.d/conda.sh ; conda activate ; conda activate
-PIP_FIND_LINKS = /dls_sw/apps/bxflow/artifacts
 
 # Create the conda environment for this version.
 conda_create:
@@ -22,13 +21,11 @@ conda_create:
 # Install the package into the conda environment.
 conda_install:
 	$(CONDA_ACTIVATE) $(CONDA_PREFIX)
-	export PIP_FIND_LINKS=$(PIP_FIND_LINKS)
 	python3 -m pip install --pre --upgrade .
 
 # Update specific packages from source in the pre-installed conda environment.
 conda_update:
 	$(CONDA_ACTIVATE) $(CONDA_PREFIX)
-	export PIP_FIND_LINKS=$(PIP_FIND_LINKS)
 	python3 -m pip install --pre --upgrade ../soakdb3
 
 # Make this version be the edge version.

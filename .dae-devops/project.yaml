@@ -1,7 +1,7 @@
 # Primary information needed for devops.
 primary:
     repository_name: soakdb3
-    package_name: soakdb3
+    package_name: soakdb3_lib
     one_line_description: "Replacement for soakdb2, including a new database backend."
     author:
         name: David Erb

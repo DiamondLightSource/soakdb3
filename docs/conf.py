@@ -12,7 +12,7 @@ from subprocess import check_output
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
 from sphinx.domains.python import PythonDomain
 
-import soakdb3
+import soakdb3_lib
 
 # -- General configuration ------------------------------------------------
 
@@ -20,7 +20,7 @@ import soakdb3
 project = "soakdb3"
 
 # The full version, including alpha/beta/rc tags.
-release = soakdb3.__version__
+release = soakdb3_lib.__version__
 
 # The short X.Y version.
 if "+" in release:
@@ -186,7 +186,7 @@ def ultimateReplace(app, docname, source):
 # It will allow the ${token} replacement in the rst documents.
 ultimate_replacements = {
     "$" + "{repository_name}": "soakdb3",
-    "$" + "{package_name}": "soakdb3",
+    "$" + "{package_name}": "soakdb3_lib",
     "$" + "{git_url}": "None",
     "$" + "{python_version_at_least}": "3.11",
 }
@@ -197,4 +197,4 @@ def setup(app):
     app.connect("source-read", ultimateReplace)
 
 
-# dae_devops_fingerprint f55a233ddf672a5ff62a447ba543c01d
+# dae_devops_fingerprint 8e665b8ee5e333a031d0f78d1f7ad517

@@ -62,7 +62,7 @@ name = "David Erb"
 
 
 [tool.setuptools_scm]
-write_to = "src/soakdb3/_version.py"
+write_to = "src/soakdb3_lib/_version.py"
 
 [tool.mypy]
 ignore_missing_imports = true # Ignore missing stubs in imported modules
@@ -84,14 +84,14 @@ exclude = [".tox", "venv"]
 
 [tool.pytest.ini_options]
 # Run pytest with all our checkers, and don't spam us with massive tracebacks on error
-addopts = "    --tb=native -vv --doctest-modules --doctest-glob=\"*.rst\"\n    --cov=soakdb3 --cov-report term --cov-report xml:cov.xml\n    "
+addopts = "    --tb=native -vv --doctest-modules --doctest-glob=\"*.rst\"\n    --cov=soakdb3_lib --cov-report term --cov-report xml:cov.xml\n    "
 # https://iscinumpy.gitlab.io/post/bound-version-constraints/#watch-for-warnings
 filterwarnings = "error"
 # Doctest python code in docs, python code in src docstrings, test functions in tests
 testpaths = "docs src tests"
 
 [tool.coverage.run]
-data_file = "/tmp/soakdb3.coverage"
+data_file = "/tmp/soakdb3_lib.coverage"
 
 [tool.coverage.paths]
 # Tests are run from installed location, map back to the src directory
@@ -102,4 +102,4 @@ source = ["src", "**/site-packages/"]
 [tool.tox]
 legacy_tox_ini = "[tox]\nskipsdist=True\n\n[testenv:{pre-commit,mypy,pytest,docs}]\n# Don't create a virtualenv for the command, requires tox-direct plugin\ndirect = True\npassenv = *\nallowlist_externals = \n    pytest \n    pre-commit\n    mypy\n    sphinx-build\n    sphinx-autobuild\ncommands =\n    pytest: pytest {posargs}\n    mypy: mypy src tests {posargs}\n    pre-commit: pre-commit run --all-files {posargs}\n    docs: sphinx-{posargs:build -EW --keep-going} -T docs build/html\n"
 
-# dae_devops_fingerprint f40f65f4f24fdc9210aaacf1a6365645
+# dae_devops_fingerprint 021811d9ca5e48189d0b9558408895d1
