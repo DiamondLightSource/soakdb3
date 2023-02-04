@@ -45,14 +45,14 @@ deploy_modules:
 	mkdir -p $(MODULE_TARGET)/$(VERSION)
 	cp modulefiles/* $(MODULE_TARGET)/$(VERSION)
 	rm -f $(MODULE_TARGET)/edge
-	ln -s $(MODULE_TARGET)/$(VERSION)/paths $(MODULE_TARGET)/edge
+	ln -s $(MODULE_TARGET)/$(VERSION) $(MODULE_TARGET)/edge
 	find $(MODULE_TARGET) -type f -exec chmod 664 {} \;
 	find $(MODULE_TARGET) -type d -exec chmod g+s {} \;
 	chgrp -R dls-softinst $(MODULE_TARGET)
 
 deploy_modules_stable:
 	rm -f $(MODULE_TARGET)/stable
-	ln -s $(MODULE_TARGET)/$(VERSION)/paths $(MODULE_TARGET)/stable
+	ln -s $(MODULE_TARGET)/$(VERSION) $(MODULE_TARGET)/stable
 
 # ------------------------------------------------------------------
 # Rsync stuff from local C: drive to shared V: drive. 

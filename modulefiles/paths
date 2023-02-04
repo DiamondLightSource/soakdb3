@@ -7,12 +7,12 @@ proc ModulesHelp { } {
 
 module-whatis "sets up the environment for soakdb3 commands"
 
-# The soakdb3 main config file is per-visit.
-setenv SOAKDB3_CONFIGFILE $workflows_directory/configurations/multibox.yaml
-
 # The soakdb3 conda environment we want to use.
 set conda_environment_version edge
 set conda_environment /dls_sw/apps/soakdb3/conda/envs/soakdb3/$conda_environment_version
+
+# The soakdb3 main config file.
+setenv SOAKDB3_CONFIGFILE $conda_environment/lib/python3.10/site-packages/soakdb3_cli/configurations/default/configuration.yaml
 
 # Function to display versions.
 set soakdb3_about "$conda_environment/bin/python -m soakdb3_cli.main --about"
