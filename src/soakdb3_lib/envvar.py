@@ -7,7 +7,7 @@ logger = logging.getLogger(__name__)
 class Envvar:
     """Class which covers environment variables, with default values."""
 
-    SOAKDB_CONFIGFILE = "SOAKDB_CONFIGFILE"
+    SOAKDB3_CONFIGFILE = "SOAKDB3_CONFIGFILE"
     XCHEM_BEFLOW_DATA = "XCHEM_BEFLOW_DATA"
     XCHEM_BEFLOW_DLS_ROOT = "XCHEM_BEFLOW_DLS_ROOT"
     BEAMLINE = "BEAMLINE"

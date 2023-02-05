@@ -101,7 +101,7 @@ class TestGoodConfigurationEnv:
 
         # ---------------------------------------------------
         environ = {
-            Envvar.SOAKDB_CONFIGFILE: configuration_filename,
+            Envvar.SOAKDB3_CONFIGFILE: configuration_filename,
         }
         GoodConfigurationEnvTester().main(constants, environ, output_directory)
 
@@ -113,7 +113,7 @@ class TestBadConfigurationEnv:
 
         # Run the bad tests in a coroutine.
 
-        BadConfigurationEnvTester("RuntimeError", "SOAKDB_CONFIGFILE is not set").main(
+        BadConfigurationEnvTester("RuntimeError", "SOAKDB3_CONFIGFILE is not set").main(
             constants,
             {},
             output_directory,
@@ -122,7 +122,7 @@ class TestBadConfigurationEnv:
         BadConfigurationEnvTester("RuntimeError", "does_not_exist.yaml").main(
             constants,
             {
-                Envvar.SOAKDB_CONFIGFILE: "does_not_exist.yaml",
+                Envvar.SOAKDB3_CONFIGFILE: "does_not_exist.yaml",
             },
             output_directory,
         )

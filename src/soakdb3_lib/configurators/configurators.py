@@ -103,7 +103,7 @@ class Configurators(Things):
         else:
             # Get the explicit name of the config file.
             bxflow_configfile = Envvar(
-                Envvar.SOAKDB_CONFIGFILE,
+                Envvar.SOAKDB3_CONFIGFILE,
                 environ=environ,
             )
 
@@ -113,13 +113,13 @@ class Configurators(Things):
                 configurator_filename = bxflow_configfile.value
                 if not os.path.exists(configurator_filename):
                     raise RuntimeError(
-                        f"unable to find {Envvar.SOAKDB_CONFIGFILE} {configurator_filename}"
+                        f"unable to find {Envvar.SOAKDB3_CONFIGFILE} {configurator_filename}"
                     )
             # Config file is not explicitly named?
             else:
                 raise RuntimeError(
                     f"command line --{configuration_keyword} not given"
-                    f" and environment variable {Envvar.SOAKDB_CONFIGFILE} is not set"
+                    f" and environment variable {Envvar.SOAKDB3_CONFIGFILE} is not set"
                 )
         configurator = self.build_object(
             {
