@@ -1,0 +1,13 @@
+{
+    "version": "0.0.1",
+    "logger": {
+        "level": "progress,-data,remote",
+        "filename": "c:/tmp/soakdb3.log"
+    },
+    "dataface_service": {
+        "protocolj_client": {
+            "host": "localhost",
+            "port": 27422
+        }
+    }
+}

@@ -1,5 +1,5 @@
 
-Starting Soakdb3 Backend Services
+Starting Service (Development)
 =======================================================================
 
 The Soakdb3 backend is implemented as set of services. 

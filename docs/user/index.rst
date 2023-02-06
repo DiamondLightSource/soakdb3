@@ -12,8 +12,8 @@ Documentation is split into four categories, also accessible from links in the s
             :caption: Tutorials
             :maxdepth: 1
 
-            tutorials/01-installing
-            tutorials/02-starting
+            tutorials/02-starting_backend
+            tutorials/03-starting_frontend
 
         +++
 
@@ -25,7 +25,8 @@ Documentation is split into four categories, also accessible from links in the s
             :caption: How-to Guides
             :maxdepth: 1
 
-            how-to/tbd
+            how-to/01-development
+            how-to/03-starting_development
 
         +++
 
@@ -37,10 +38,10 @@ Documentation is split into four categories, also accessible from links in the s
             :caption: Explanations
             :maxdepth: 1
 
-            explanations/01-docs-structure
-            explanations/02-developing
-            explanations/03-testing
-            explanations/04-devops
+            explanations/22-developing
+            explanations/23-testing
+            explanations/24-devops
+            explanations/25-docs-structure
 
         +++
 
