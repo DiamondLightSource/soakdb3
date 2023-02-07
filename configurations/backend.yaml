@@ -25,7 +25,7 @@ dataface_specification:
         actual_dataface_specification:
             type: "soakdb3_lib.datafaces.aiosqlite"
             type_specific_tbd:
-                vistid_mappings:
+                visitid_mappings:
                     - action: "regex_replace"
                       pattern: "^[Cc][:]"
                       replace: ""

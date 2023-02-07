@@ -72,6 +72,10 @@ class StartServices(Base):
 
         # Open the context (servers and clients).
         async with context:
+
+            # Announce.
+            logger.info("services started, waiting for excel clients to connect...")
+
             try:
                 # Stay up until all processes are dead.
                 # TODO: Use asyncio wait or sentinel for all started processes to be dead.
