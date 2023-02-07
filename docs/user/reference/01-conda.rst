@@ -6,10 +6,10 @@ The production backend is built as a conda environment.
 Install the soakdb3 package in a virtual environment::
 
     $ module load python/3.10
-    $ python3 -m venv /scratch/$USER/soakdb3
+    $ python3 -m venv /scratch/$USER/venv/soakdb3
     $ source /scratch/$USER/soakdb3/bin/activate
     $ pip install --upgrade pip
-    $ pip install soakdb3
+    $ pip install --upgrade soakdb3
 
 Make sure you have the version of soakdb3 you expect, since this is the version used to name the conda environment::
 

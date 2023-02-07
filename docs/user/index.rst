@@ -25,7 +25,7 @@ Documentation is split into four categories, also accessible from links in the s
             :caption: How-to Guides
             :maxdepth: 1
 
-            how-to/01-development
+            how-to/01-installing_development
             how-to/03-starting_development
 
         +++
@@ -53,6 +53,7 @@ Documentation is split into four categories, also accessible from links in the s
             :caption: Reference
             :maxdepth: 1
 
+            reference/01-conda
             reference/api
 
         +++

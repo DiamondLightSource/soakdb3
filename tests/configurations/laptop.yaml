@@ -30,6 +30,17 @@ dataface_specification:
         actual_dataface_specification:
             type: "soakdb3_lib.datafaces.aiosqlite"
             type_specific_tbd:
+                visitid_mappings:
+                    - action: "regex_replace"
+                      pattern: "[Cc][:]"
+                      replace: ""
+                    - action: "regex_replace"
+                      pattern: "[Yy][:]/"
+                      replace: "/dls/labxchem/"
+                    # For developer computers.
+                    - action: "regex_replace"
+                      pattern: "//dc/dls/labxchem/"
+                      replace: "/dls/labxchem/"
                 database:
                     type: "soakdb3_lib.databases.aiosqlite"
                     filename: "set by code"
