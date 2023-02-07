@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>User Guide &#8212; soakdb3 0.0.5.dev1+gc2b89e0 documentation</title>
+    <title>User Guide &#8212; soakdb3 0.0.7.dev3+g3be54d0 documentation</title>
   
   
   
@@ -50,7 +50,7 @@
     <link rel="shortcut icon" href="../_static/dls-favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Installing" href="tutorials/01-installing.html" />
+    <link rel="next" title="Starting Backend Services" href="tutorials/02-starting_backend.html" />
     <link rel="prev" title="soakdb3" href="../index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="docsearch:language" content="en">
@@ -268,22 +268,24 @@
   <div class="bd-toc-item navbar-nav">
     <p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="tutorials/01-installing.html">Installing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorials/02-starting.html">Starting Soakdb3 Backend Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/02-starting_backend.html">Starting Backend Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/03-starting_frontend.html">Starting Frontend Excel</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">How-to Guides</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="how-to/tbd.html">Under construction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="how-to/01-installing_development.html">Installing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="how-to/03-starting_development.html">Starting Service (Development)</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Explanations</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="explanations/01-docs-structure.html">About the documentation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="explanations/02-developing.html">Developing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="explanations/03-testing.html">Testing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="explanations/04-devops.html">Devops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="explanations/22-developing.html">Developing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="explanations/23-testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="explanations/24-devops.html">Devops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="explanations/25-docs-structure.html">About the documentation</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference</span></p>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="reference/01-conda.html">Building the conda environment</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="reference/api.html">API</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="reference/api/command_line.html">Command Line</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/api/classes.html">Classes</a></li>
@@ -334,8 +336,8 @@
 <div class="toctree-wrapper compound">
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="tutorials/01-installing.html">Installing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorials/02-starting.html">Starting Soakdb3 Backend Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/02-starting_backend.html">Starting Backend Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/03-starting_frontend.html">Starting Frontend Excel</a></li>
 </ul>
 </div>
 </div>
@@ -352,7 +354,8 @@
 <div class="toctree-wrapper compound">
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">How-to Guides</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="how-to/tbd.html">Under construction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="how-to/01-installing_development.html">Installing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="how-to/03-starting_development.html">Starting Service (Development)</a></li>
 </ul>
 </div>
 </div>
@@ -369,10 +372,10 @@
 <div class="toctree-wrapper compound">
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Explanations</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="explanations/01-docs-structure.html">About the documentation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="explanations/02-developing.html">Developing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="explanations/03-testing.html">Testing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="explanations/04-devops.html">Devops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="explanations/22-developing.html">Developing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="explanations/23-testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="explanations/24-devops.html">Devops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="explanations/25-docs-structure.html">About the documentation</a></li>
 </ul>
 </div>
 </div>
@@ -389,6 +392,7 @@
 <div class="toctree-wrapper compound">
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="reference/01-conda.html">Building the conda environment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="reference/api.html">API</a></li>
 </ul>
 </div>
@@ -417,10 +421,10 @@
           <p class="prev-next-title">soakdb3</p>
       </div>
   </a>
-  <a class='right-next' id="next-link" href="tutorials/01-installing.html" title="next page">
+  <a class='right-next' id="next-link" href="tutorials/02-starting_backend.html" title="next page">
   <div class="prev-next-info">
       <p class="prev-next-subtitle">next</p>
-      <p class="prev-next-title">Installing</p>
+      <p class="prev-next-title">Starting Backend Services</p>
   </div>
   <i class="fa-solid fa-angle-right"></i>
   </a>
