@@ -41,9 +41,15 @@ class Aiosqlite(Thing):
         )
 
         self.__dbspec = require(
-            f"{callsign(self)} specification database section",
+            f"{callsign(self)} specification",
             self.__type_specific,
             "database",
+        )
+
+        self.__visitid_mappings = require(
+            f"{callsign(self)} specification",
+            self.__type_specific,
+            "visitid_mappings",
         )
 
         # Cache of database objects we have created.
@@ -109,13 +115,21 @@ class Aiosqlite(Thing):
 
         """
 
-        path = visitid
+        # Go through all the mappings defined in the specification.
+        for visitid_mapping in self.__visitid_mappings:
+            # This mapping calls for regex replacement?
+            if visitid_mapping["action"] == "regex_replace":
+                pattern = visitid_mapping["pattern"]
+                replace = visitid_mapping["replace"]
 
-        path = re.sub(r"^[Cc][:]", "", path)
+                # The visitid matches this mapping?
+                match = re.search(pattern, visitid)
+                if match is not None:
+                    # Replace with the substitution.
+                    path = re.sub(pattern, replace, visitid)
+                    return path
 
-        path = re.sub(r"^[Yy][:]", "/dls/labxchem", path)
-
-        return path
+        return visitid
 
     # # ----------------------------------------------------------------------------------------
     # async def reinstance(self):
