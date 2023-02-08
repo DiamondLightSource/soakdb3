@@ -3,6 +3,10 @@ import logging
 import os
 from typing import Optional
 
+from dls_servbase_lib.configurators.configurators import (
+    dls_servbase_configurators_set_default,
+)
+
 # Utilities.
 from dls_utilpack.callsign import callsign
 from dls_utilpack.require import require
@@ -15,10 +19,6 @@ from soakdb3_api.things import Things
 
 # Environment variables with some extra functionality.
 from soakdb3_lib.envvar import Envvar
-
-from dls_servbase_lib.configurators.configurators import (
-    dls_servbase_configurators_set_default,
-)
 
 logger = logging.getLogger(__name__)
 
