@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Building the conda environment &#8212; soakdb3 0.0.7.dev3+g3be54d0 documentation</title>
+    <title>Building the conda environment &#8212; soakdb3 1.0.1.dev1+g629e184 documentation</title>
   
   
   
@@ -329,7 +329,7 @@
 <p>Install the soakdb3 package in a virtual environment:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ module load python/3.10
 $ python3 -m venv /scratch/$USER/venv/soakdb3
-$ source /scratch/$USER/soakdb3/bin/activate
+$ source /scratch/$USER/venv/soakdb3/bin/activate
 $ pip install --upgrade pip
 $ pip install --upgrade soakdb3
 </pre></div>
@@ -353,11 +353,13 @@ $ make provision_conda
 </pre></div>
 </div>
 <p>Make this the edge version:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ make edge_conda
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ deploy_modules
+$ deploy_spreadsheets
 </pre></div>
 </div>
 <p>Or the stable version:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ make stable_conda
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ deploy_modules_stable
+$ deploy_spreadsheets_stable
 </pre></div>
 </div>
 </section>

@@ -7,7 +7,7 @@ Install the soakdb3 package in a virtual environment::
 
     $ module load python/3.10
     $ python3 -m venv /scratch/$USER/venv/soakdb3
-    $ source /scratch/$USER/soakdb3/bin/activate
+    $ source /scratch/$USER/venv/soakdb3/bin/activate
     $ pip install --upgrade pip
     $ pip install --upgrade soakdb3
 
@@ -31,8 +31,10 @@ Build and provision the conda environment::
 
 Make this the edge version::
 
-    $ make edge_conda
+    $ deploy_modules
+    $ deploy_spreadsheets
 
 Or the stable version::
 
-    $ make stable_conda
+    $ deploy_modules_stable
+    $ deploy_spreadsheets_stable
