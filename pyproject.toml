@@ -16,7 +16,7 @@ classifiers = [
     "Programming Language :: Python :: 3.11",
 ]
 description = "Replacement for soakdb2, including a new database backend."
-dependencies = ["dls_servbase", "dls_normsql", "dls_mainiac", "dls_utilpack"]
+dependencies = ["dls_servbase", "dls_normsql", "dls_mainiac", "dls_utilpack", "graypy"]
 dynamic = ["version"]
 license.file = "LICENSE"
 readme = "README.rst"
@@ -102,4 +102,4 @@ source = ["src", "**/site-packages/"]
 [tool.tox]
 legacy_tox_ini = "[tox]\nskipsdist=True\n\n[testenv:{pre-commit,mypy,pytest,docs}]\n# Don't create a virtualenv for the command, requires tox-direct plugin\ndirect = True\npassenv = *\nallowlist_externals = \n    pytest \n    pre-commit\n    mypy\n    sphinx-build\n    sphinx-autobuild\ncommands =\n    pytest: pytest {posargs}\n    mypy: mypy src tests {posargs}\n    pre-commit: pre-commit run --all-files {posargs}\n    docs: sphinx-{posargs:build -EW --keep-going} -T docs build/html\n"
 
-# dae_devops_fingerprint 021811d9ca5e48189d0b9558408895d1
+# dae_devops_fingerprint b10b7d8f9c6705d5c73330b356d81797
