@@ -16,6 +16,10 @@ from soakdb3_api.things import Things
 # Environment variables with some extra functionality.
 from soakdb3_lib.envvar import Envvar
 
+from dls_servbase_lib.configurators.configurators import (
+    dls_servbase_configurators_set_default,
+)
+
 logger = logging.getLogger(__name__)
 
 # -----------------------------------------------------------------------------------------
@@ -25,6 +29,9 @@ __default_configurator = None
 def configurators_set_default(configurator):
     global __default_configurator
     __default_configurator = configurator
+
+    # We share configurator with servbase.
+    dls_servbase_configurators_set_default(configurator)
 
 
 def configurators_get_default():

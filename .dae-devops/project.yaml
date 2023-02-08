@@ -19,3 +19,4 @@ primary:
               - dls_normsql
               - dls_mainiac
               - dls_utilpack
+              - graypy

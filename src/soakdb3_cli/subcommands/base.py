@@ -17,7 +17,7 @@ logger = logging.getLogger(__name__)
 
 class Base:
     """
-    Base class for femtocheck subcommands.  Handles details like configuration.
+    Base class for subcommands.  Handles details like configuration.
     """
 
     def __init__(self, args):
