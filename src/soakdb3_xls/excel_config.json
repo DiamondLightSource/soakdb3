@@ -2,7 +2,7 @@
     "version": "0.0.1",
     "logger": {
         "level": "progress,-data,remote",
-        "filename": "c:/tmp/soakdb3.log"
+        "filename": "%temp%/soakdb3.log"
     },
     "dataface_service": {
         "protocolj_client": {
