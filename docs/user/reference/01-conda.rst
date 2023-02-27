@@ -29,12 +29,23 @@ Build and provision the conda environment::
     $ make create_conda
     $ make provision_conda
 
+Change the version in the modulefile::
+
+    $ vi /dls_sw/apps/xchem/soakdb3/soakdb3_configuration/modulefile    
+      (change the line starting with: set conda_environment_version)
+    
 Make this the edge version::
 
-    $ deploy_modules
-    $ deploy_spreadsheets
+    $ make deploy_modules
+    $ make deploy_spreadsheets
 
-Or the stable version::
+And, if you wish, the stable version::
 
-    $ deploy_modules_stable
-    $ deploy_spreadsheets_stable
+    $ make deploy_modules_stable
+    $ make deploy_spreadsheets_stable
+
+Check you have the right version by starting a new shell and::
+
+    $ module load xchem/soakdb3/stable
+
+Follow the instructions for starting the backend and for starting the frontend.
