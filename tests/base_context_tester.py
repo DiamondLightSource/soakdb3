@@ -4,12 +4,10 @@ import multiprocessing
 import os
 
 import pytest
+from dls_multiconf_lib.constants import ThingTypes as MulticonfThingTypes
 
 # Configurator.
-from soakdb3_lib.configurators.configurators import (
-    Configurators,
-    configurators_set_default,
-)
+from dls_multiconf_lib.multiconfs import Multiconfs, multiconfs_set_default
 
 logger = logging.getLogger(__name__)
 
@@ -54,27 +52,27 @@ class BaseContextTester:
             pytest.fail(failure_message)
 
     # ----------------------------------------------------------------------------------------
-    def get_configurator(self):
+    def get_multiconf(self):
 
-        configurator = Configurators().build_object(
+        multiconf = Multiconfs().build_object(
             {
-                "type": "soakdb3_lib.configurators.yaml",
+                "type": MulticonfThingTypes.YAML,
                 "type_specific_tbd": {"filename": self.__configuration_file},
             }
         )
 
         # For convenience, always do these replacement.
-        configurator.substitute({"output_directory": self.__output_directory})
+        multiconf.substitute({"output_directory": self.__output_directory})
 
-        # Add various things from the environment into the configurator.
-        configurator.substitute(
+        # Add various things from the environment into the multiconf.
+        multiconf.substitute(
             {
                 "CWD": os.getcwd(),
                 "PYTHONPATH": os.environ.get("PYTHONPATH", "PYTHONPATH"),
             }
         )
 
-        # Set the global value of our configurator which might be used in other modules.
-        configurators_set_default(configurator)
+        # Set the global value of our multiconf which might be used in other modules.
+        multiconfs_set_default(multiconf)
 
-        return configurator
+        return multiconf

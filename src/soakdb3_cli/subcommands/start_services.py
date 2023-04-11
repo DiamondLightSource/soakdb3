@@ -41,12 +41,9 @@ class StartServices(Base):
         """"""
 
         # Load the configuration.
-        configurator = self.get_configurator(vars(self._args))
+        multiconf = self.get_multiconf(vars(self._args))
 
-        # Let the configurator know about any mpqueue logging.
-        # configurator.set_logging_mpqueue(self.__mainiac.mpqueue)
-
-        context_configuration = await configurator.load()
+        context_configuration = await multiconf.load()
 
         if len(self._args.service_names) == 0:
             self._args.service_names = ["all"]

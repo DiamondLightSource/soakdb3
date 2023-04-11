@@ -18,5 +18,6 @@ primary:
               - dls_servbase
               - dls_normsql
               - dls_mainiac
+              - dls_multiconf
               - dls_utilpack
               - graypy

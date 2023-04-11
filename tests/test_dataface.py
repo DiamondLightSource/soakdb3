@@ -43,7 +43,7 @@ class DatafaceHeadTester(BaseContextTester):
     async def _main_coroutine(self, constants, output_directory):
         """ """
 
-        configurator = self.get_configurator()
+        configurator = self.get_multiconf()
 
         context_configuration = await configurator.load()
         context = Contexts().build_object(context_configuration)
@@ -98,7 +98,7 @@ class DatafaceBodyTester(BaseContextTester):
     async def _main_coroutine(self, constants, output_directory):
         """ """
 
-        configurator = self.get_configurator()
+        configurator = self.get_multiconf()
 
         context_configuration = await configurator.load()
         xchem_be_context = Contexts().build_object(context_configuration)
