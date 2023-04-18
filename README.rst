@@ -17,10 +17,22 @@ The front-end spreadsheet is started from soakdb3.bat in the visit directory.  T
 
 To deploy a new version of the front-end, you cd to the soakdb3_configuration folder and type "make deploy_spreadsheets"
 
-development
+Development - Starting the Back End
 ------------------------------------------------------------------------
+
+Furthermore, assume you have checked out the test data into `c:\27\soakdb3`.
+
+    cd soakdb3
+    pip install -e .
+    soakdb3.cli start_services --c configurations/development.yaml
+
+
+
+Development - Starting the Front End
+------------------------------------------------------------------------
+
 Assume you have checked out this repo into the folder `c:\27\soakdb3`.
-Furthermore, assuem you have checked out the test data into `c:\27\soakdb3_test_data`.
+Furthermore, assume you have checked out the test data into `c:\27\soakdb3_test_data`.
 
 To run the spreadsheet on a development computer::
 

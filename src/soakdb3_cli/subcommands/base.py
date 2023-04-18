@@ -90,7 +90,7 @@ class Base:
         else:
             # Get the explicit name of the config file.
             multiconf_filename = Envvar(
-                Envvar.FTRIXMINER_CONFIGFILE,
+                Envvar.SOAKDB3_CONFIGFILE,
                 environ=environ,
             )
 
@@ -100,13 +100,13 @@ class Base:
                 multiconf_filename = multiconf_filename.value
                 if not os.path.exists(multiconf_filename):
                     raise RuntimeError(
-                        f"unable to find {Envvar.FTRIXMINER_CONFIGFILE} {multiconf_filename}"
+                        f"unable to find {Envvar.SOAKDB3_CONFIGFILE} {multiconf_filename}"
                     )
             # Config file is not explicitly named?
             else:
                 raise RuntimeError(
                     f"command line --{configuration_keyword} not given"
-                    f" and environment variable {Envvar.FTRIXMINER_CONFIGFILE} is not set"
+                    f" and environment variable {Envvar.SOAKDB3_CONFIGFILE} is not set"
                 )
 
         multiconf = Multiconfs().build_object(

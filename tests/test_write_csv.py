@@ -31,9 +31,9 @@ class WriteCsvTester(BaseContextTester):
     async def _main_coroutine(self, constants, output_directory):
         """ """
 
-        configurator = self.get_multiconf()
+        multiconf = self.get_multiconf()
 
-        context_configuration = await configurator.load()
+        context_configuration = await multiconf.load()
         context = Contexts().build_object(context_configuration)
 
         # The visitid to match what is in the test configuration yaml.
