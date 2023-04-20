@@ -2,7 +2,7 @@
 import logging
 
 # Base class.
-from soakdb3_api.thing import Thing
+from dls_utilpack.thing import Thing
 
 logger = logging.getLogger()
 

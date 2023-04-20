@@ -7,11 +7,11 @@ from dls_utilpack.callsign import callsign
 from dls_utilpack.explain import explain
 from dls_utilpack.require import require
 
+# Basic things.
+from dls_utilpack.thing import Thing
+
 # XchemBeDataface protocolj things.
 from soakdb3_api.datafaces.constants import Commands, Keywords
-
-# Basic things.
-from soakdb3_api.thing import Thing
 
 # Base class for an aiohttp server.
 from soakdb3_lib.base_aiohttp import BaseAiohttp

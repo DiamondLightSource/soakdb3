@@ -8,11 +8,11 @@ import re
 from dls_utilpack.callsign import callsign
 from dls_utilpack.require import require
 
+# Base class for generic things.
+from dls_utilpack.thing import Thing
+
 # Database constants.
 from soakdb3_api.databases.constants import Tablenames
-
-# Base class for generic things.
-from soakdb3_api.thing import Thing
 
 # Database manager.
 from soakdb3_lib.databases.databases import Databases

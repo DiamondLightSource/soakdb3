@@ -1,13 +1,13 @@
 # Use standard logging in this module.
 import logging
 
+# Class managing list of things.
+from dls_utilpack.things import Things
+
 from soakdb3_api.datafaces.constants import DatafaceTypes
 
 # Exceptions.
 from soakdb3_api.exceptions import NotFound
-
-# Class managing list of things.
-from soakdb3_api.things import Things
 
 logger = logging.getLogger(__name__)
 
