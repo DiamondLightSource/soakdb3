@@ -20,7 +20,7 @@ To deploy a new version of the front-end, you cd to the soakdb3_configuration fo
 Development - Starting the Back End
 ------------------------------------------------------------------------
 
-Furthermore, assume you have checked out the test data into `c:\27\soakdb3`.
+Furthermore, assume you have checked out the test data into c:\27\soakdb3.
 
     cd soakdb3
     pip install -e .
@@ -31,8 +31,8 @@ Furthermore, assume you have checked out the test data into `c:\27\soakdb3`.
 Development - Starting the Front End
 ------------------------------------------------------------------------
 
-Assume you have checked out this repo into the folder `c:\27\soakdb3`.
-Furthermore, assume you have checked out the test data into `c:\27\soakdb3_test_data`.
+Assume you have checked out this repo into the folder c:\27\soakdb3.
+Furthermore, assume you have checked out the test data into c:\27\soakdb3_test_data.
 
 To run the spreadsheet on a development computer::
 
