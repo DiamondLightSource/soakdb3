@@ -1,0 +1,18 @@
+/* ********** Please don't edit this file! */ 
+/* ********** It has been generated automatically by dae_devops version 0.5.2. */ 
+/* ********** For repository_name soakdb3 */ 
+
+/* The theme normally has this, but I think it's ok to use the full width of the window in all @media sizes.
+
+@media (min-width: 960px)
+.bd-page-width {
+    max-width: 88rem;
+}
+
+*/
+
+.bd-page-width {
+    max-width: 100%;
+}
+
+/* dae_devops_fingerprint 7587ab332856ef902636e87b51f8b664 */ 
