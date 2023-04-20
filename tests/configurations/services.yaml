@@ -18,7 +18,7 @@ external_access_bits:
     dataface_port: &DATAFACE_PORT 22422
 
 # The dataface client/server composite.
-dataface_specification:
+soakdb3_dataface_specification:
     type: "soakdb3_lib.datafaces.aiohttp"
     type_specific_tbd:
         # The remote dataface server access.

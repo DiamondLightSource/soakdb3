@@ -1,7 +1,5 @@
 import logging
 
-from soakdb3_api.datafaces.context import Context as ApiDatafaceContext
-
 # Base class for an asyncio context
 from soakdb3_lib.contexts.base import Base as ContextBase
 
@@ -28,8 +26,6 @@ class Context(ContextBase):
     def __init__(self, specification):
         ContextBase.__init__(self, thing_type, specification)
 
-        self.__api_dataface_context = None
-
     # ----------------------------------------------------------------------------------------
     async def aenter(self):
         """ """
@@ -46,16 +42,14 @@ class Context(ContextBase):
         elif self.context_specification.get("start_as") == "process":
             await self.server.start_process()
 
-        self.__api_dataface_context = ApiDatafaceContext(self.specification())
-        await self.__api_dataface_context.aenter()
-
     # ----------------------------------------------------------------------------------------
     async def aexit(self):
         """ """
 
         if self.server is not None:
-            # Put in request to shutdown the server.
-            await self.server.client_shutdown()
+            if self.context_specification.get("start_as") == "process":
+                # Put in request to shutdown the server.
+                await self.server.client_shutdown()
 
-        if self.__api_dataface_context is not None:
-            await self.__api_dataface_context.aexit()
+            if self.context_specification.get("start_as") == "coro":
+                await self.server.direct_shutdown()
