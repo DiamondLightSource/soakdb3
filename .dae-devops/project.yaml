@@ -20,4 +20,4 @@ primary:
               - dls_mainiac
               - dls_multiconf
               - dls_utilpack
-              - graypy
+              - pydantic

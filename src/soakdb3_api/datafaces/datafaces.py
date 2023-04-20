@@ -1,6 +1,8 @@
 # Use standard logging in this module.
 import logging
 
+from soakdb3_api.datafaces.constants import DatafaceTypes
+
 # Exceptions.
 from soakdb3_api.exceptions import NotFound
 
@@ -56,9 +58,14 @@ class Datafaces(Things):
     def lookup_class(self, class_type):
         """"""
 
-        if class_type == "soakdb3_lib.datafaces.aiohttp":
+        if class_type == DatafaceTypes.AIOHTTP:
             from soakdb3_api.datafaces.aiohttp import Aiohttp
 
             return Aiohttp
+
+        if class_type == DatafaceTypes.DIRECT:
+            from soakdb3_lib.datafaces.aiosqlite import Aiosqlite
+
+            return Aiosqlite
 
         raise NotFound("unable to get dataface class for type %s" % (class_type))
