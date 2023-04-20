@@ -3,6 +3,7 @@ import json
 
 import dls_mainiac_lib.version
 
+import soakdb3_lib.version
 from soakdb3_lib import __version__
 
 
@@ -24,6 +25,7 @@ def meta(given_meta=None):
     s = {}
     s["soakdb3_cli"] = version()
     s.update(dls_mainiac_lib.version.meta())
+    s.update(soakdb3_lib.version.meta())
 
     if given_meta is not None:
         given_meta.update(s)
