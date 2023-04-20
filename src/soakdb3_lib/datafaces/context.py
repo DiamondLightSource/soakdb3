@@ -1,6 +1,6 @@
 import logging
 
-# Base class for a Thing which has a name and traits.
+from dls_utilpack.callsign import callsign
 from dls_utilpack.thing import Thing
 
 # Things created in the context.
@@ -20,6 +20,8 @@ class Context(Thing):
     On exiting, it commands the server to shut down.
 
     The enter and exit methods are exposed for use during testing.
+
+    TODO: Add unit test for soakdb3_lib.datafaces.context.
     """
 
     # ----------------------------------------------------------------------------------------
@@ -70,3 +72,31 @@ class Context(Thing):
         """ """
 
         await self.aexit()
+
+    # ----------------------------------------------------------------------------------------
+    async def is_process_started(self):
+        """"""
+
+        if self.server is None:
+            raise RuntimeError(f"{callsign(self)} a process has not been defined")
+
+        try:
+            return await self.server.is_process_started()
+        except Exception:
+            raise RuntimeError(
+                f"unable to determing process started for server {callsign(self.server)}"
+            )
+
+    # ----------------------------------------------------------------------------------------
+    async def is_process_alive(self):
+        """"""
+
+        if self.server is None:
+            raise RuntimeError(f"{callsign(self)} a process has not been defined")
+
+        try:
+            return await self.server.is_process_alive()
+        except Exception:
+            raise RuntimeError(
+                f"unable to determing dead or alive for server {callsign(self.server)}"
+            )
