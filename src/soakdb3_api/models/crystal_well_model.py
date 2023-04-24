@@ -13,8 +13,10 @@ class CrystalWellModel(BaseModel):
     """
 
     ID: Optional[str] = None
-    LabVisit: str
-    CrystalPlate: str
-    CrystalWell: str
-    EchoX: int
-    EchoY: int
+    LabVisit: Optional[str] = None
+    CrystalPlate: Optional[str] = None
+    CrystalWell: Optional[str] = None
+    EchoX: Optional[int] = None
+    EchoY: Optional[int] = None
+    ProteinName: Optional[str] = None
+    DropVolume: Optional[float] = None
