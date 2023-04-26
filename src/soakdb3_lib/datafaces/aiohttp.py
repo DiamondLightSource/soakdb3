@@ -67,7 +67,7 @@ class Aiohttp(Thing, BaseAiohttp):
         """
 
         try:
-            threading.current_thread().name = "dataface"
+            threading.current_thread().name = "soakdb3.dataface"
 
             self.activate_thread_base(loop)
 
