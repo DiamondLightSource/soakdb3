@@ -3,6 +3,8 @@ import csv
 import logging
 import os
 import re
+import shutil
+from pathlib import Path
 
 # Utilities.
 from dls_utilpack.callsign import callsign
@@ -361,6 +363,54 @@ class Aiosqlite(Thing):
 
             # Write all rows to the csv file.
             writer.writerows(rows)
+
+    # ----------------------------------------------------------------------------------------
+    async def move_to_done(
+        self,
+        visitid: str,
+        csv_file: str,
+        transfer_type: str,
+    ) -> None:
+        """
+        Handle request to move a csv file to the done subdirectory.
+
+        Args:
+            visitid (str): full path to visit, including /processing
+            csv_file (str): name of csv file with (no directory part included)
+            transfer_type (str): either "soak", "cryo" or "shifter"
+        """
+
+        # Get the csv directory from the specification.
+        # This is an absolute filename ending in /lab36.
+        csv_directory = self.__cache_cvs_directories.get(visitid)
+
+        if csv_directory is None:
+            raise RuntimeError(
+                f"no database connection has yet been made for visitid {visitid}"
+            )
+
+        if transfer_type in ["soak", "cryo"]:
+            tranfer_subdirectory = "echo"
+        else:
+            tranfer_subdirectory = transfer_type
+
+        # We expect the source path to exist in the given transfer type.
+        source_path = Path(csv_directory) / tranfer_subdirectory / csv_file
+
+        if source_path.is_file():
+            # Target file has the same name as the source, but in the done subdirectory.
+            target_path = (
+                Path(csv_directory)
+                / tranfer_subdirectory
+                / "done"
+                / f"{Path(csv_file).stem}_{transfer_type}.csv"
+            )
+            await self.__create_directory(target_path)
+            shutil.move(source_path, target_path)
+        else:
+            logger.warning(
+                f"[UNEXPECTED] cannot move to done because file doesn't exist: {source_path}"
+            )
 
     # ----------------------------------------------------------------------------------------
     async def __create_directory(self, filename):

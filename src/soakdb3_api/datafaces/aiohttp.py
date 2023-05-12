@@ -41,32 +41,59 @@ class Aiohttp:
     # ----------------------------------------------------------------------------------------
     async def query(self, visitid, sql, subs=None, why=None):
         """"""
-        return await self.__send_protocolj("query", visitid, sql, subs=subs, why=why)
+        return await self.__send_protocolj(
+            "query",
+            visitid,
+            sql,
+            subs=subs,
+            why=why,
+        )
 
     # ----------------------------------------------------------------------------------------
     async def query_for_dictionary(self, visitid, sql, subs=None, why=None):
         """"""
         return await self.__send_protocolj(
-            "query_for_dictionary", visitid, sql, subs=subs, why=why
+            "query_for_dictionary",
+            visitid,
+            sql,
+            subs=subs,
+            why=why,
         )
 
     # ----------------------------------------------------------------------------------------
     async def execute(self, visitid, sql, subs=None, why=None):
         """"""
-        return await self.__send_protocolj("execute", visitid, sql, subs=subs, why=why)
+        return await self.__send_protocolj(
+            "execute",
+            visitid,
+            sql,
+            subs=subs,
+            why=why,
+        )
 
     # ----------------------------------------------------------------------------------------
     async def insert(self, visitid, table_name, records, subs=None, why=None):
         """"""
         return await self.__send_protocolj(
-            "insert", visitid, table_name, records, subs=subs, why=why
+            "insert",
+            visitid,
+            table_name,
+            records,
+            subs=subs,
+            why=why,
         )
 
     # ----------------------------------------------------------------------------------------
     async def update(self, visitid, table_name, record, where, subs=None, why=None):
         """"""
         return await self.__send_protocolj(
-            "update", visitid, table_name, record, where, subs=subs, why=why
+            "update",
+            visitid,
+            table_name,
+            record,
+            where,
+            subs=subs,
+            why=why,
         )
 
     # ----------------------------------------------------------------------------------------
@@ -75,7 +102,11 @@ class Aiohttp:
         Handle update request from a soakdb range change.
         """
 
-        return await self.__send_protocolj("update_head_fields", visitid, fields)
+        return await self.__send_protocolj(
+            "update_head_fields",
+            visitid,
+            fields,
+        )
 
     # ----------------------------------------------------------------------------------------
     async def update_body_fields(self, visitid, fields):
@@ -83,7 +114,11 @@ class Aiohttp:
         Handle update request from a soakdb range change.
         """
 
-        return await self.__send_protocolj("update_body_fields", visitid, fields)
+        return await self.__send_protocolj(
+            "update_body_fields",
+            visitid,
+            fields,
+        )
 
     # ----------------------------------------------------------------------------------------
     async def write_csv(self, visitid, rows, filename):
@@ -96,7 +131,35 @@ class Aiohttp:
 
         """
 
-        return await self.__send_protocolj("write_csv", visitid, rows, filename)
+        return await self.__send_protocolj(
+            "write_csv",
+            visitid,
+            rows,
+            filename,
+        )
+
+    # ----------------------------------------------------------------------------------------
+    async def move_to_done(
+        self,
+        visitid: str,
+        csv_file: str,
+        transfer_type: str,
+    ) -> None:
+        """
+        Handle request to move a csv file to the done subdirectory.
+
+        Args:
+            visitid (str): full path to visit, including /processing
+            csv_file (str): name of csv file with (no directory part included)
+            transfer_type (str): either "soak", "cryo" or "shifter"
+        """
+
+        return await self.__send_protocolj(
+            "move_to_done",
+            visitid,
+            csv_file,
+            transfer_type,
+        )
 
     # ----------------------------------------------------------------------------------------
     async def report_health(self):
