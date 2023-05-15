@@ -399,12 +399,7 @@ class Aiosqlite(Thing):
 
         if source_path.is_file():
             # Target file has the same name as the source, but in the done subdirectory.
-            target_path = (
-                Path(csv_directory)
-                / tranfer_subdirectory
-                / "done"
-                / f"{Path(csv_file).stem}_{transfer_type}.csv"
-            )
+            target_path = Path(csv_directory) / tranfer_subdirectory / "done" / csv_file
             await self.__create_directory(target_path)
             shutil.move(source_path, target_path)
         else:

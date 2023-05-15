@@ -94,9 +94,8 @@ class MoveToDoneTester(BaseContextTester):
         restval = "none"
 
         # Transfer type "soak" is considered "echo".
-        done_filename = f"{str(Path(filename).stem)}_{transfer_type}.csv"
         with open(
-            f"{output_directory}/lab36/{transfer_subdirectory}/done/{done_filename}"
+            f"{output_directory}/lab36/{transfer_subdirectory}/done/{filename}"
         ) as stream:
             reader = csv.DictReader(stream, fieldnames=fieldnames, restval=restval)
             i = 0
