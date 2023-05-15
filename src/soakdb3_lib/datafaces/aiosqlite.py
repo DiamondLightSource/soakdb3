@@ -350,7 +350,7 @@ class Aiosqlite(Thing):
             visitid,
             (
                 "SELECT ID, Puck, PuckPosition, MountedTimeStamp"
-                f" FROM {Tablenames.BODY} WHERE COALESCE(PuckPosition, '') != ''"
+                f" FROM {Tablenames.BODY} WHERE COALESCE(PuckPosition, '') != '' AND COALESCE(PinBarcode, '') = ''"
             ),
         )
 

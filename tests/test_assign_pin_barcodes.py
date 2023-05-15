@@ -142,6 +142,20 @@ class AssignPinBarcodesTester(BaseContextTester):
             ],
         )
 
+        # Next record has pin barcode already assigned.
+        uuid1 += 1
+        await dataface.insert(
+            visitid,
+            Tablenames.BODY,
+            [
+                {
+                    BodyFieldnames.ID: uuid1,
+                    BodyFieldnames.Puck: "IN-0093",
+                    BodyFieldnames.PuckPosition: 10,
+                    BodyFieldnames.PinBarcode: "AA100A0001",
+                }
+            ],
+        )
         # Assign the barcodes.
         await dataface.assign_pin_barcodes(visitid)
 
@@ -149,7 +163,7 @@ class AssignPinBarcodesTester(BaseContextTester):
         all_sql = f"SELECT * FROM {Tablenames.BODY} ORDER BY ID ASC"
 
         records = await dataface.query_for_dictionary(visitid, all_sql)
-        assert len(records) == 5
+        assert len(records) == 6
 
         record = records[0]
         assert record["PinBarcode"] == "IN150E0735"
@@ -165,3 +179,6 @@ class AssignPinBarcodesTester(BaseContextTester):
 
         record = records[4]
         assert record["PinBarcode"] == PinBarcodeErrors.CANT_FIND
+
+        record = records[5]
+        assert record["PinBarcode"] == "AA100A0001"
