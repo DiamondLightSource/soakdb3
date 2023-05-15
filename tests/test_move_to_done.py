@@ -1,6 +1,5 @@
 import csv
 import logging
-from pathlib import Path
 
 # Client context creator.
 from soakdb3_api.datafaces.context import Context as Soakdb3DatafaceClientContext
