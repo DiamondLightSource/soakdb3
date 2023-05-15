@@ -121,6 +121,17 @@ class Aiohttp:
         )
 
     # ----------------------------------------------------------------------------------------
+    async def assign_pin_barcodes(self, visitid):
+        """
+        Assign barcodes for pin positions to rows which don't have them yet.
+        """
+
+        return await self.__send_protocolj(
+            "assign_pin_barcodes",
+            visitid,
+        )
+
+    # ----------------------------------------------------------------------------------------
     async def write_csv(self, visitid, rows, filename):
         """
         Handle request to write rows as csv file.

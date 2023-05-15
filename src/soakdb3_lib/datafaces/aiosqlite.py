@@ -14,7 +14,7 @@ from dls_utilpack.require import require
 from dls_utilpack.thing import Thing
 
 # Database constants.
-from soakdb3_api.databases.constants import Tablenames
+from soakdb3_api.databases.constants import PinBarcodeErrors, Tablenames
 
 # Database manager.
 from soakdb3_lib.databases.databases import Databases
@@ -35,6 +35,13 @@ class Aiosqlite(Thing):
     # ----------------------------------------------------------------------------------------
     def __init__(self, specification=None):
         Thing.__init__(self, thing_type, specification)
+
+        # Barcodes filename is not type specific.
+        self.__puck_barcodes_filename = require(
+            f"{callsign(self)} specification",
+            self.specification(),
+            "puck_barcodes_filename",
+        )
 
         self.__type_specific = require(
             f"{callsign(self)} specification",
@@ -331,6 +338,79 @@ class Aiosqlite(Thing):
         sql = f"UPDATE {table_name} SET {sets}"
 
         await self.execute(visitid, sql, subs=subs, why="update head table")
+
+    # ----------------------------------------------------------------------------------------
+    async def assign_pin_barcodes(self, visitid):
+        """
+        Assign barcodes for pin positions to rows which don't have them yet.
+        """
+
+        # Get all the rows which have pin positions but no barcodes yet.
+        crystal_rows = await self.query_for_dictionary(
+            visitid,
+            (
+                "SELECT ID, Puck, PuckPosition, MountedTimeStamp"
+                f" FROM {Tablenames.BODY} WHERE COALESCE(PuckPosition, '') != ''"
+            ),
+        )
+
+        # Nothing to do?
+        if len(crystal_rows) == 0:
+            return
+
+        # Load the file consisting of the recent barcode scans.
+        # This has to be reloaded every time because its contents changes asynchronously.
+        # For example \\dc.diamond.ac.uk\dls\science\groups\i04-1\software\barcode-store\store\store.csv.
+        pucks = {}
+        with open(self.__puck_barcodes_filename, "r") as stream:
+            reader = csv.reader(stream)
+            for puck_row in reader:
+                puck = {}
+                puck["scanned_on"] = puck_row[1]
+                puck["pin_barcodes"] = puck_row[3:]
+
+                # Make a dictionary keyed by puck barcode.
+                pucks[puck_row[2]] = puck
+
+        fields = []
+        # Traverse the crystal rows that need pin barcodes.
+        for crystal_row in crystal_rows:
+            # Get puck row as keyed by the puck barcode.
+            puck = pucks.get(crystal_row["Puck"])
+
+            # No puck barcode assigned to this crystal?
+            # Shouldn't really happen!
+            if puck is None:
+                pin_barcode = PinBarcodeErrors.NO_PUCK
+            else:
+                # Pin position is not an integer?
+                # Shouldn't really happen!
+                try:
+                    pin_position = int(crystal_row["PuckPosition"])
+
+                    # Pin position exceeds number of pins scanned for the puck?
+                    # Shouldn't really happen!
+                    if pin_position >= len(puck["pin_barcodes"]):
+                        pin_barcode = PinBarcodeErrors.BAD_PIN
+                    else:
+                        pin_barcode = puck["pin_barcodes"][pin_position]
+
+                except ValueError:
+                    pin_barcode = PinBarcodeErrors.BAD_INT
+
+            # Make an update field.
+            # TODO: Consider a transaction encapsulating the query needing barcodes and their assignment.
+            field = {
+                "id": crystal_row["ID"],
+                "field": "PinBarcode",
+                "value": pin_barcode,
+            }
+            fields.append(field)
+
+        # Anything to do?
+        if len(fields) > 0:
+            # Update the pin barcodes in the database.
+            await self.update_body_fields(visitid, fields)
 
     # ----------------------------------------------------------------------------------------
     async def write_csv(self, visitid, rows, filename):

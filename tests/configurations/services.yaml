@@ -29,6 +29,7 @@ soakdb3_dataface_specification:
         # The local implementation of the dataface.
         actual_dataface_specification:
             type: "soakdb3_lib.datafaces.aiosqlite"
+            puck_barcodes_filename: tests/configurations/store.csv
             type_specific_tbd:
                 visitid_mappings:
                     - action: "regex_replace"

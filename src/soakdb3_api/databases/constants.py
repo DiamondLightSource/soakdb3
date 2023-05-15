@@ -82,6 +82,15 @@ class BodyFieldnames:
 
 
 # ----------------------------------------------------------------------------------------
+# Constants used in the PinBarcode field when something goes wrong.
+class PinBarcodeErrors:
+    NO_PUCK = "-NO-PUCK-"
+    BAD_PIN = "-BAD-PIN-"
+    BAD_INT = "-BAD-INT-"
+    CANT_FIND = "-CANT-FIND-"
+
+
+# ----------------------------------------------------------------------------------------
 class VisitFieldnames:
     CREATED_ON = "created_on"
     VISITID = "visitid"
