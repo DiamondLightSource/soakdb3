@@ -1,4 +1,3 @@
-import csv
 import logging
 
 from soakdb3_api.databases.constants import BodyFieldnames, PinBarcodeErrors, Tablenames
