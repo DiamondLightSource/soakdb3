@@ -81,6 +81,8 @@ class AssignPinBarcodesTester(BaseContextTester):
                     BodyFieldnames.ID: uuid1,
                     BodyFieldnames.Puck: "IN-0093",
                     BodyFieldnames.PuckPosition: 4,
+                    # Pin mounted 35.9 hours before puck scan time of 2023-05-12 15:22:55.
+                    BodyFieldnames.MountedTimestamp: "11/5/2023 03:22:58",
                 }
             ],
         )
@@ -95,6 +97,7 @@ class AssignPinBarcodesTester(BaseContextTester):
                     BodyFieldnames.ID: uuid1,
                     BodyFieldnames.Puck: "ZZ-0093",
                     BodyFieldnames.PuckPosition: 3,
+                    BodyFieldnames.MountedTimestamp: "2023-05-12 15:22:51",
                 }
             ],
         )
@@ -109,6 +112,7 @@ class AssignPinBarcodesTester(BaseContextTester):
                     BodyFieldnames.ID: uuid1,
                     BodyFieldnames.Puck: "IN-0093",
                     BodyFieldnames.PuckPosition: "X",
+                    BodyFieldnames.MountedTimestamp: "2023-05-12 15:22:51",
                 }
             ],
         )
@@ -123,6 +127,7 @@ class AssignPinBarcodesTester(BaseContextTester):
                     BodyFieldnames.ID: uuid1,
                     BodyFieldnames.Puck: "IN-0093",
                     BodyFieldnames.PuckPosition: 17,
+                    BodyFieldnames.MountedTimestamp: "2023-05-12 15:22:51",
                 }
             ],
         )
@@ -137,6 +142,7 @@ class AssignPinBarcodesTester(BaseContextTester):
                     BodyFieldnames.ID: uuid1,
                     BodyFieldnames.Puck: "IN-0093",
                     BodyFieldnames.PuckPosition: 11,
+                    BodyFieldnames.MountedTimestamp: "2023-05-12 15:22:51",
                 }
             ],
         )
@@ -152,9 +158,73 @@ class AssignPinBarcodesTester(BaseContextTester):
                     BodyFieldnames.Puck: "IN-0093",
                     BodyFieldnames.PuckPosition: 5,
                     BodyFieldnames.PinBarcode: "AA100A0001",
+                    BodyFieldnames.MountedTimestamp: "2023-05-12 15:22:51",
                 }
             ],
         )
+
+        # Next record is a negative time difference.
+        uuid1 += 1
+        await dataface.insert(
+            visitid,
+            Tablenames.BODY,
+            [
+                {
+                    BodyFieldnames.ID: uuid1,
+                    BodyFieldnames.Puck: "IN-0093",
+                    BodyFieldnames.PuckPosition: 6,
+                    BodyFieldnames.MountedTimestamp: "2023-05-12 15:22:58",
+                }
+            ],
+        )
+
+        # Next record is too much time difference.
+        uuid1 += 1
+        await dataface.insert(
+            visitid,
+            Tablenames.BODY,
+            [
+                {
+                    BodyFieldnames.ID: uuid1,
+                    BodyFieldnames.Puck: "IN-0093",
+                    BodyFieldnames.PuckPosition: 7,
+                    # Puck mounted more than 36 hours before puck scan time.
+                    BodyFieldnames.MountedTimestamp: "2023-05-11 03:22:51",
+                }
+            ],
+        )
+
+        # Next record is bad time format (blank) in the MountedTimestamp.
+        uuid1 += 1
+        await dataface.insert(
+            visitid,
+            Tablenames.BODY,
+            [
+                {
+                    BodyFieldnames.ID: uuid1,
+                    BodyFieldnames.Puck: "IN-0093",
+                    BodyFieldnames.PuckPosition: 8,
+                    # Bad time format (blank).
+                    BodyFieldnames.MountedTimestamp: "",
+                }
+            ],
+        )
+
+        # Next record is bad time format (bad string) in the store.csv for puck DF-044.
+        uuid1 += 1
+        await dataface.insert(
+            visitid,
+            Tablenames.BODY,
+            [
+                {
+                    BodyFieldnames.ID: uuid1,
+                    BodyFieldnames.Puck: "DF-044",
+                    BodyFieldnames.PuckPosition: 8,
+                    BodyFieldnames.MountedTimestamp: "2023-05-12 15:22:58",
+                }
+            ],
+        )
+
         # Assign the barcodes.
         await dataface.assign_pin_barcodes(visitid)
 
@@ -162,7 +232,7 @@ class AssignPinBarcodesTester(BaseContextTester):
         all_sql = f"SELECT * FROM {Tablenames.BODY} ORDER BY ID ASC"
 
         records = await dataface.query_for_dictionary(visitid, all_sql)
-        assert len(records) == 6
+        assert len(records) == 10
 
         record = records[0]
         assert record["PinBarcode"] == "IN150E0735"
@@ -181,3 +251,15 @@ class AssignPinBarcodesTester(BaseContextTester):
 
         record = records[5]
         assert record["PinBarcode"] == "AA100A0001"
+
+        record = records[6]
+        assert record["PinBarcode"] == PinBarcodeErrors.BAD_DATE
+
+        record = records[7]
+        assert record["PinBarcode"] == PinBarcodeErrors.BAD_DATE
+
+        record = records[8]
+        assert record["PinBarcode"] == PinBarcodeErrors.BAD_DATE
+
+        record = records[9]
+        assert record["PinBarcode"] == PinBarcodeErrors.BAD_DATE

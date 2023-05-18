@@ -21,3 +21,4 @@ primary:
               - dls_multiconf
               - dls_utilpack
               - pydantic
+              - python-dateutil

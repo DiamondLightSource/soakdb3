@@ -6,6 +6,9 @@ import os
 import re
 import shutil
 from pathlib import Path
+from typing import Optional
+
+from dateutil.parser import ParserError, parse
 
 # Utilities.
 from dls_utilpack.callsign import callsign
@@ -341,6 +344,59 @@ class Aiosqlite(Thing):
         await self.execute(visitid, sql, subs=subs, why="update head table")
 
     # ----------------------------------------------------------------------------------------
+    def __check_mounted_vs_scanned(
+        self,
+        puck_scanned_at: str,
+        crystal_mounted_at: str,
+    ) -> Optional[str]:
+        """
+        Assign barcodes for pin positions to rows which don't have them yet.
+        """
+
+        if puck_scanned_at is None:
+            return "no puck scan date"
+
+        if crystal_mounted_at is None:
+            return "no crystal MountedTimestamp"
+
+        try:
+            # If there is a hyphen in the date string, assume it is ISO, otherwise assume it's dd/mm/yyyy.
+            dayfirst = "-" not in puck_scanned_at
+            puck_scanned_datetime = parse(puck_scanned_at, dayfirst=dayfirst)
+        except ParserError as exception:
+            return f"invalid puck scan date: {str(exception)}"
+
+        try:
+            # If there is a hyphen in the date string, assume it is ISO, otherwise assume it's dd/mm/yyyy.
+            dayfirst = "-" not in crystal_mounted_at
+            crystal_mounted_datetime = parse(crystal_mounted_at, dayfirst=dayfirst)
+        except ParserError as exception:
+            return f"invalid crystal MountedTimestamp: {str(exception)}"
+
+        #  From the VBA: if we are within 36 hours (1.5 days) of the mounted time, but we must have mounted before scanning.
+        #  If scannedDate - mountedDate < 1.5 And scannedDate - mountedDate > 0 Then it's recent, add it.
+
+        time_difference = (
+            puck_scanned_datetime - crystal_mounted_datetime
+        ).total_seconds()
+
+        logger.debug(
+            f"puck_scanned_datetime is {puck_scanned_datetime.isoformat()},"
+            f" crystal_mounted_datetime is {crystal_mounted_datetime.isoformat()},"
+            f" difference is {'%0.3f' % time_difference} seconds,"
+            f" which is {'%0.3f' % (time_difference/3600)} hours"
+        )
+
+        if time_difference < 0:
+            return "puck scan date is before crystal MountedTimestamp"
+
+        elif time_difference > 36 * 3600:
+            return f"puck scan date is {'%0.3f' % (time_difference/3600)} hours after crystal MountedTimestamp (36 hours is the max)"
+
+        else:
+            return None
+
+    # ----------------------------------------------------------------------------------------
     async def assign_pin_barcodes(self, visitid):
         """
         Assign barcodes for pin positions to rows which don't have them yet.
@@ -350,7 +406,7 @@ class Aiosqlite(Thing):
         crystal_rows = await self.query_for_dictionary(
             visitid,
             (
-                "SELECT ID, Puck, PuckPosition, MountedTimeStamp"
+                "SELECT ID, Puck, PuckPosition, MountedTimestamp"
                 f" FROM {Tablenames.BODY} WHERE (COALESCE(PuckPosition, '') != '') AND (COALESCE(PinBarcode, '') = '')"
             ),
         )
@@ -367,7 +423,7 @@ class Aiosqlite(Thing):
             reader = csv.reader(stream)
             for puck_row in reader:
                 puck = {}
-                puck["scanned_on"] = puck_row[1]
+                puck["scanned_at"] = puck_row[1]
                 puck["pin_barcodes"] = puck_row[3:]
 
                 # Make a dictionary keyed by puck barcode.
@@ -383,6 +439,7 @@ class Aiosqlite(Thing):
                     "ID": crystal_row["ID"],
                     "Puck": crystal_row["Puck"],
                     "PuckPosition": crystal_row["PuckPosition"],
+                    "MountedTimestamp": crystal_row["MountedTimestamp"],
                 },
             }
 
@@ -397,27 +454,45 @@ class Aiosqlite(Thing):
                     f"[ANOMALY] crystal row has a puck barcode not found in store.csv\n{json.dumps(anomaly, indent=4)}"
                 )
             else:
-                # Pin position is not an integer?
-                # Shouldn't really happen!
-                try:
-                    pin_position = int(crystal_row["PuckPosition"])
+                puck_scanned_at = puck["scanned_at"]
+                crystal_mounted_at = crystal_row["MountedTimestamp"]
 
-                    # Pin position exceeds number of pins scanned for the puck?
-                    # Shouldn't really happen!
-                    if pin_position < 1 or pin_position >= len(puck["pin_barcodes"]):
-                        pin_barcode = PinBarcodeErrors.BAD_PIN
-                        anomaly["pin_barcodes_count"] = len(puck["pin_barcodes"])
-                        logger.warning(
-                            f"[ANOMALY] crystal row has a PuckPosition less than 0 or more than the tokens on the puck row in store.csv\n{json.dumps(anomaly, indent=4)}"
-                        )
-                    else:
-                        pin_barcode = puck["pin_barcodes"][pin_position - 1]
+                reason_why_not = self.__check_mounted_vs_scanned(
+                    puck_scanned_at,
+                    crystal_mounted_at,
+                )
 
-                except ValueError:
-                    pin_barcode = PinBarcodeErrors.BAD_INT
+                if reason_why_not is not None:
+                    pin_barcode = PinBarcodeErrors.BAD_DATE
+                    anomaly["puck_scanned_at"] = puck_scanned_at
                     logger.warning(
-                        f"[ANOMALY] crystal row has a PuckPosition that is not an integer\n{json.dumps(anomaly, indent=4)}"
+                        f"[ANOMALY] {reason_why_not}\n{json.dumps(anomaly, indent=4)}"
                     )
+
+                else:
+                    # Pin position is not an integer?
+                    # Shouldn't really happen!
+                    try:
+                        pin_position = int(crystal_row["PuckPosition"])
+
+                        # Pin position exceeds number of pins scanned for the puck?
+                        # Shouldn't really happen!
+                        if pin_position < 1 or pin_position >= len(
+                            puck["pin_barcodes"]
+                        ):
+                            pin_barcode = PinBarcodeErrors.BAD_PIN
+                            anomaly["pin_barcodes_count"] = len(puck["pin_barcodes"])
+                            logger.warning(
+                                f"[ANOMALY] crystal row has a PuckPosition less than 0 or more than the tokens on the puck row in store.csv\n{json.dumps(anomaly, indent=4)}"
+                            )
+                        else:
+                            pin_barcode = puck["pin_barcodes"][pin_position - 1]
+
+                    except ValueError:
+                        pin_barcode = PinBarcodeErrors.BAD_INT
+                        logger.warning(
+                            f"[ANOMALY] crystal row has a PuckPosition that is not an integer\n{json.dumps(anomaly, indent=4)}"
+                        )
 
             # Make an update field.
             # TODO: Consider a transaction encapsulating the query needing barcodes and their assignment.

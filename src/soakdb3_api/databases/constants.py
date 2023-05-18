@@ -91,6 +91,7 @@ class PinBarcodeErrors:
     NO_PUCK = ""
     BAD_PIN = ""
     BAD_INT = ""
+    BAD_DATE = ""
     CANT_FIND = "-CANT-FIND-"
 
 
