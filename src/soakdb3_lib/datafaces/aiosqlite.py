@@ -408,7 +408,7 @@ class Aiosqlite(Thing):
                         pin_barcode = PinBarcodeErrors.BAD_PIN
                         anomaly["pin_barcodes_count"] = len(puck["pin_barcodes"])
                         logger.warning(
-                            f"[ANOMALY] crystal row has a pin position less than 0 or more than the tokens on the puck row in store.csv\n{json.dumps(anomaly, indent=4)}"
+                            f"[ANOMALY] crystal row has a PuckPosition less than 0 or more than the tokens on the puck row in store.csv\n{json.dumps(anomaly, indent=4)}"
                         )
                     else:
                         pin_barcode = puck["pin_barcodes"][pin_position - 1]
@@ -416,7 +416,7 @@ class Aiosqlite(Thing):
                 except ValueError:
                     pin_barcode = PinBarcodeErrors.BAD_INT
                     logger.warning(
-                        f"[ANOMALY] crystal row has a pin position that is not an integer\n{json.dumps(anomaly, indent=4)}"
+                        f"[ANOMALY] crystal row has a PuckPosition that is not an integer\n{json.dumps(anomaly, indent=4)}"
                     )
 
             # Make an update field.
