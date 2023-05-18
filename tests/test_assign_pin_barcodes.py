@@ -80,7 +80,7 @@ class AssignPinBarcodesTester(BaseContextTester):
                 {
                     BodyFieldnames.ID: uuid1,
                     BodyFieldnames.Puck: "IN-0093",
-                    BodyFieldnames.PuckPosition: 3,
+                    BodyFieldnames.PuckPosition: 4,
                 }
             ],
         )
@@ -113,7 +113,7 @@ class AssignPinBarcodesTester(BaseContextTester):
             ],
         )
 
-        # Next record is a bad pin number..
+        # Next record is a bad pin number.
         uuid1 += 1
         await dataface.insert(
             visitid,
@@ -122,7 +122,7 @@ class AssignPinBarcodesTester(BaseContextTester):
                 {
                     BodyFieldnames.ID: uuid1,
                     BodyFieldnames.Puck: "IN-0093",
-                    BodyFieldnames.PuckPosition: 16,
+                    BodyFieldnames.PuckPosition: 17,
                 }
             ],
         )
@@ -136,12 +136,12 @@ class AssignPinBarcodesTester(BaseContextTester):
                 {
                     BodyFieldnames.ID: uuid1,
                     BodyFieldnames.Puck: "IN-0093",
-                    BodyFieldnames.PuckPosition: 10,
+                    BodyFieldnames.PuckPosition: 11,
                 }
             ],
         )
 
-        # Next record has pin barcode already assigned.
+        # Next record has pin barcode already assigned, so doesn't get overwritten.
         uuid1 += 1
         await dataface.insert(
             visitid,
@@ -150,7 +150,7 @@ class AssignPinBarcodesTester(BaseContextTester):
                 {
                     BodyFieldnames.ID: uuid1,
                     BodyFieldnames.Puck: "IN-0093",
-                    BodyFieldnames.PuckPosition: 10,
+                    BodyFieldnames.PuckPosition: 5,
                     BodyFieldnames.PinBarcode: "AA100A0001",
                 }
             ],

@@ -350,7 +350,7 @@ class Aiosqlite(Thing):
             visitid,
             (
                 "SELECT ID, Puck, PuckPosition, MountedTimeStamp"
-                f" FROM {Tablenames.BODY} WHERE COALESCE(PuckPosition, '') != '' AND COALESCE(PinBarcode, '') = ''"
+                f" FROM {Tablenames.BODY} WHERE (COALESCE(PuckPosition, '') != '') AND (COALESCE(PinBarcode, '') = '')"
             ),
         )
 
@@ -390,10 +390,10 @@ class Aiosqlite(Thing):
 
                     # Pin position exceeds number of pins scanned for the puck?
                     # Shouldn't really happen!
-                    if pin_position >= len(puck["pin_barcodes"]):
+                    if pin_position < 1 or pin_position >= len(puck["pin_barcodes"]):
                         pin_barcode = PinBarcodeErrors.BAD_PIN
                     else:
-                        pin_barcode = puck["pin_barcodes"][pin_position]
+                        pin_barcode = puck["pin_barcodes"][pin_position - 1]
 
                 except ValueError:
                     pin_barcode = PinBarcodeErrors.BAD_INT
