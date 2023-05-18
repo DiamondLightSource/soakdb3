@@ -22,3 +22,5 @@ primary:
               - dls_utilpack
               - pydantic
               - python-dateutil
+              # TODO: Move types-python-dateutil to dependency for build stage only.
+              - types-python-dateutil
