@@ -83,10 +83,14 @@ class BodyFieldnames:
 
 # ----------------------------------------------------------------------------------------
 # Constants used in the PinBarcode field when something goes wrong.
+# These would get written into the spreadsheet Pin Barcode column.
+# We decided to go back to blank values since these get exported to ispyb and read by the beamline,
+# and it's possible anything other than a barcode or -CANT-FIND- might mess up the scanning robot.
+# The code writes logger.warning with the [ANOMALY] tag containing details.
 class PinBarcodeErrors:
-    NO_PUCK = "-NO-PUCK-"
-    BAD_PIN = "-BAD-PIN-"
-    BAD_INT = "-BAD-INT-"
+    NO_PUCK = ""
+    BAD_PIN = ""
+    BAD_INT = ""
     CANT_FIND = "-CANT-FIND-"
 
 
