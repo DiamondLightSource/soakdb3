@@ -1,5 +1,6 @@
 import copy
 import csv
+import json
 import logging
 import os
 import re
@@ -375,6 +376,16 @@ class Aiosqlite(Thing):
         fields = []
         # Traverse the crystal rows that need pin barcodes.
         for crystal_row in crystal_rows:
+            anomaly = {
+                "visitid": visitid,
+                "puck_barcodes_filename": self.__puck_barcodes_filename,
+                "crystal_row": {
+                    "ID": crystal_row["ID"],
+                    "Puck": crystal_row["Puck"],
+                    "PuckPosition": crystal_row["PuckPosition"],
+                },
+            }
+
             # Get puck row as keyed by the puck barcode.
             puck = pucks.get(crystal_row["Puck"])
 
@@ -382,6 +393,9 @@ class Aiosqlite(Thing):
             # Shouldn't really happen!
             if puck is None:
                 pin_barcode = PinBarcodeErrors.NO_PUCK
+                logger.warning(
+                    f"[ANOMALY] crystal row has a puck barcode not found in store.csv\n{json.dumps(anomaly, indent=4)}"
+                )
             else:
                 # Pin position is not an integer?
                 # Shouldn't really happen!
@@ -392,11 +406,18 @@ class Aiosqlite(Thing):
                     # Shouldn't really happen!
                     if pin_position < 1 or pin_position >= len(puck["pin_barcodes"]):
                         pin_barcode = PinBarcodeErrors.BAD_PIN
+                        anomaly["pin_barcodes_count"] = len(puck["pin_barcodes"])
+                        logger.warning(
+                            f"[ANOMALY] crystal row has a pin position less than 0 or more than the tokens on the puck row in store.csv\n{json.dumps(anomaly, indent=4)}"
+                        )
                     else:
                         pin_barcode = puck["pin_barcodes"][pin_position - 1]
 
                 except ValueError:
                     pin_barcode = PinBarcodeErrors.BAD_INT
+                    logger.warning(
+                        f"[ANOMALY] crystal row has a pin position that is not an integer\n{json.dumps(anomaly, indent=4)}"
+                    )
 
             # Make an update field.
             # TODO: Consider a transaction encapsulating the query needing barcodes and their assignment.
