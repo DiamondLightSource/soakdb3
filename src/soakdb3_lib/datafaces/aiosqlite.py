@@ -477,9 +477,7 @@ class Aiosqlite(Thing):
 
                         # Pin position exceeds number of pins scanned for the puck?
                         # Shouldn't really happen!
-                        if pin_position < 1 or pin_position >= len(
-                            puck["pin_barcodes"]
-                        ):
+                        if pin_position < 1 or pin_position > len(puck["pin_barcodes"]):
                             pin_barcode = PinBarcodeErrors.BAD_PIN
                             anomaly["pin_barcodes_count"] = len(puck["pin_barcodes"])
                             logger.warning(

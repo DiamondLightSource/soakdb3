@@ -80,7 +80,7 @@ class AssignPinBarcodesTester(BaseContextTester):
                 {
                     BodyFieldnames.ID: uuid1,
                     BodyFieldnames.Puck: "IN-0093",
-                    BodyFieldnames.PuckPosition: 4,
+                    BodyFieldnames.PuckPosition: 16,
                     # Pin mounted 35.9 hours before puck scan time of 2023-05-12 15:22:55.
                     BodyFieldnames.MountedTimestamp: "11/5/2023 03:22:58",
                 }
@@ -235,7 +235,7 @@ class AssignPinBarcodesTester(BaseContextTester):
         assert len(records) == 10
 
         record = records[0]
-        assert record["PinBarcode"] == "IN150E0735"
+        assert record["PinBarcode"] == "IN150E0871"
 
         record = records[1]
         assert record["PinBarcode"] == PinBarcodeErrors.NO_PUCK

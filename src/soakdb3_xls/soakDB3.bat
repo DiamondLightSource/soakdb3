@@ -3,4 +3,4 @@
 
 set SOAKDB3_VISITID=%~dp0..
 set SOAKDB3_CONFIGFILE=\\dc\dls_sw\apps\xchem\xchem-lifesupport\configurations\soakdb3_production.json
-start excel /x "\\dc\dls_sw\apps\xchem\soakdb3\spreadsheets\1.5.1\soakDB_v3.0.xlsm"
+start excel /x "\\dc\dls_sw\apps\xchem\soakdb3\spreadsheets\1.6.0\soakDB_v3.0.xlsm"
