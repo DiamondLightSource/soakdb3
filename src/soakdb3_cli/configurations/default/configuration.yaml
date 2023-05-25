@@ -38,7 +38,7 @@ dataface_specification:
                       pattern: "^[Yy][:]"
                       replace: "/dls/labxchem/"
                 database:
-                    type: "soakdb3_lib.databases.aiosqlite"
+                    type: "dls_normsql.aiosqlite"
                     filename: "set by code"
                     backup_directory: "set by code"
                     log_level: "WARNING"

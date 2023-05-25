@@ -3,9 +3,11 @@ import logging
 import multiprocessing
 
 import pytest
+from dls_normsql.constants import ClassTypes
+from dls_normsql.databases import Databases
 
 from soakdb3_api.databases.constants import BodyFieldnames, HeadFieldnames, Tablenames
-from soakdb3_lib.databases.databases import Databases
+from soakdb3_api.databases.database_definition import DatabaseDefinition
 
 logger = logging.getLogger(__name__)
 
@@ -18,8 +20,8 @@ class TestDatabaseHead:
         """
 
         database_specification = {
-            "type": "soakdb3_lib.databases.aiosqlite",
-            "filename": "%s/soakdb3.sqlite" % (output_directory),
+            "type": ClassTypes.AIOSQLITE,
+            "filename": "%s/soakdb3_pytest.sqlite" % (output_directory),
         }
 
         # Test direct SQL access to the database.
@@ -38,7 +40,7 @@ class TestDatabaseBody:
         """
 
         database_specification = {
-            "type": "soakdb3_lib.databases.aiosqlite",
+            "type": "dls_normsql.aiosqlite",
             "filename": "%s/soakdb3.sqlite" % (output_directory),
         }
 
@@ -58,7 +60,7 @@ class TestDatabaseSqliteBackupRestore:
         """
 
         database_specification = {
-            "type": "soakdb3_lib.databases.aiosqlite",
+            "type": "dls_normsql.aiosqlite",
             "filename": "%s/soakdb3.sqlite" % (output_directory),
         }
 
@@ -112,10 +114,13 @@ class DatabaseTesterHead(_BaseTester):
         """ """
 
         databases = Databases()
-        database = databases.build_object(database_specification)
+        database = databases.build_object(
+            database_specification,
+            DatabaseDefinition(),
+        )
 
         # Connect to database.
-        await database.connect()
+        await database.connect(should_drop_database=True)
 
         try:
             # Write one record.
@@ -142,13 +147,15 @@ class DatabaseTesterBody(_BaseTester):
         self, constants, database_specification, output_directory
     ):
         """ """
-
         databases = Databases()
-        database = databases.build_object(database_specification)
+        database = databases.build_object(
+            database_specification,
+            DatabaseDefinition(),
+        )
 
         try:
             # Connect to database.
-            await database.connect()
+            await database.connect(should_drop_database=True)
 
             uuid1 = 1000
             uuid2 = 2000
@@ -209,10 +216,13 @@ class DatabaseTesterBackupRestore(_BaseTester):
         """ """
 
         databases = Databases()
-        database = databases.build_object(database_specification)
+        database = databases.build_object(
+            database_specification,
+            DatabaseDefinition(),
+        )
 
         # Connect to database.
-        await database.connect()
+        await database.connect(should_drop_database=True)
 
         try:
             uuid1 = 1000

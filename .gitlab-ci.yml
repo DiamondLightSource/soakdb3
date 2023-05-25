@@ -1,5 +1,5 @@
 # ********** Please don't edit this file!
-# ********** It has been generated automatically by dae_devops version 0.5.2.
+# ********** It has been generated automatically by dae_devops version 0.5.3.dev1+g36e9e1c.d20230523.
 # ********** For repository_name soakdb3
 
 variables:
@@ -87,4 +87,4 @@ package_pip:
 #     # The validate_docs artifacts are in the build/html folder.
 #     - make -f .dae-devops/Makefile publish_docs
 
-# dae_devops_fingerprint 4565f44d5a1e853692f58b6ae3a96c61
+# dae_devops_fingerprint 138dfc3a58570e6d90eb4732e7338781

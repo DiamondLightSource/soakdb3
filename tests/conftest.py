@@ -45,7 +45,7 @@ def logging_setup():
     logging.getLogger("soakdb3_lib.base_aiohttp").setLevel("INFO")
 
     # All xchem_be database sql commands.
-    # logging.getLogger("soakdb3_lib.databases.aiosqlite").setLevel("INFO")
+    # logging.getLogger("dls_normsql.aiosqlite").setLevel("INFO")
 
     logging.getLogger("soakdb3_lib.contexts.classic").setLevel("INFO")
     logging.getLogger("soakdb3_lib.datafaces.context").setLevel("INFO")

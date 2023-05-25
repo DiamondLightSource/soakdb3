@@ -1,5 +1,5 @@
 # ********** Please don't edit this file!
-# ********** It has been generated automatically by dae_devops version 0.5.2.
+# ********** It has been generated automatically by dae_devops version 0.5.3.dev1+g36e9e1c.d20230523.
 # ********** For repository_name soakdb3
 
 from pathlib import Path
@@ -150,7 +150,7 @@ html_theme_options = dict(
     logo=dict(
         text=project,
     ),
-    gitlab_url="None/soakdb3",
+    gitlab_url="https://github.com/DiamondLightSource/soakdb3",
     icon_links=[],
     navbar_end=["theme-switcher", "icon-links"],
 )
@@ -187,7 +187,7 @@ def ultimateReplace(app, docname, source):
 ultimate_replacements = {
     "$" + "{repository_name}": "soakdb3",
     "$" + "{package_name}": "soakdb3_lib",
-    "$" + "{git_url}": "None",
+    "$" + "{git_url}": "https://github.com/DiamondLightSource",
     "$" + "{python_version_at_least}": "3.1",
 }
 
@@ -197,4 +197,4 @@ def setup(app):
     app.connect("source-read", ultimateReplace)
 
 
-# dae_devops_fingerprint 2b0bd1b9aacaccb81e02f6c3ba44a437
+# dae_devops_fingerprint 1436ce76b6fbb352ef4be88f7f20ddad
