@@ -280,12 +280,13 @@ class Aiosqlite(Thing):
             f" and updating {len(rows.keys())} rows"
         )
 
+        await database.begin()
+
         try:
             # Do the inserts at the start of the transaction.
             await database.insert(
                 Tablenames.BODY,
                 new_rows,
-                should_commit=False,
             )
 
             # Perform the updates on each row.
@@ -306,20 +307,19 @@ class Aiosqlite(Thing):
                 await database.execute(
                     sql,
                     subs=subs,
-                    should_commit=False,
                 )
+
+            # Commit all the updates.
+            logger.debug(
+                f"committing {len(new_rows)} new rows"
+                f" and updating {len(rows.keys())} rows"
+            )
+            await database.commit()
+
         except Exception:
             # Don't keep any partial operation.
             database.rollback()
             raise
-
-        # Commit all the updates.
-        logger.debug(
-            f"committing {len(new_rows)} new rows"
-            f" and updating {len(rows.keys())} rows"
-        )
-        await database.commit()
-        logger.debug("committed")
 
     # ----------------------------------------------------------------------------------------
     async def update_head_fields(self, visitid, fields):
