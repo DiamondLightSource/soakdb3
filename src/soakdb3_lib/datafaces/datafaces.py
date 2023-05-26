@@ -47,8 +47,8 @@ class Datafaces(Things):
             return Aiohttp
 
         elif class_type == "soakdb3_lib.datafaces.aiosqlite":
-            from soakdb3_lib.datafaces.aiosqlite import Aiosqlite
+            from soakdb3_lib.datafaces.normsql import Normsql
 
-            return Aiosqlite
+            return Normsql
 
         raise NotFound("unable to get dataface class for type %s" % (class_type))

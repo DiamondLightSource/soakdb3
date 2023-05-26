@@ -1,5 +1,5 @@
 # ********** Please don't edit this file!
-# ********** It has been generated automatically by dae_devops version 0.5.2.
+# ********** It has been generated automatically by dae_devops version 0.5.3.
 # ********** For repository_name soakdb3
 
 # This file is for use as a devcontainer and a runtime container
@@ -40,4 +40,4 @@ ENV PATH=/venv/bin:$PATH
 ENTRYPOINT ["soakdb3"]
 CMD ["--version"]
 
-# dae_devops_fingerprint 9ff8e9331ec715bc6a58b17884119f6e
+# dae_devops_fingerprint b47bdd9a358105e4dd26f540f42bbf7b

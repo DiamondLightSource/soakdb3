@@ -1,5 +1,5 @@
 # ********** Please don't edit this file!
-# ********** It has been generated automatically by dae_devops version 0.5.2.
+# ********** It has been generated automatically by dae_devops version 0.5.3.
 # ********** For repository_name soakdb3
 
 name: Code CI
@@ -39,7 +39,7 @@ jobs:
       fail-fast: false
       matrix:
         os: ["ubuntu-latest"] # can add windows-latest, macos-latest
-        python: ["3.10", "3.11"]
+        python: ["3.10"]
         install: ["-e .[dev,docs]"]
         # Make one version be non-editable to test both paths of version code
         include:
@@ -68,6 +68,10 @@ jobs:
 
       - name: List dependency tree
         run: pipdeptree
+
+      # TODO: Make startup of MySQL able to be configured.
+      - name: Start up the MySQL that comes with Unbuntu
+        run: sudo /etc/init.d/mysql start
 
       - name: Run tests
         run: |
@@ -212,4 +216,4 @@ jobs:
         with:
           password: ${{ secrets.PYPI_TOKEN }}
 
-# dae_devops_fingerprint 9d63584e1f4dbf1aade23a343c04004c
+# dae_devops_fingerprint adf2b49cc576a9c060e1d3257841b202

@@ -1,5 +1,5 @@
 # ********** Please don't edit this file!
-# ********** It has been generated automatically by dae_devops version 0.5.2.
+# ********** It has been generated automatically by dae_devops version 0.5.3.
 # ********** For repository_name soakdb3
 
 # ---------------------------------------------------------------------
@@ -69,4 +69,4 @@ publish_docs:
 	cp -r build/html/* $(DOCS_PUBLISH_ROOT)
 	
 
-# dae_devops_fingerprint 17444c38bc0036a20fb9a2d8c598b25b
+# dae_devops_fingerprint aa3527f5e00cc362a1553a0469ebd9c9

@@ -22,7 +22,7 @@ Start the services::
 
 You should see some lines of output including something like::
 
-    soakdb3_lib.databases.aiosqlite.Aiosqlite database file is /dls/labxchem/data/lb19758/lb19758-64/processing/database/soakDBDataFile.sqlite revision 1
+    dls_normsql.aiosqlite.Aiosqlite database file is /dls/labxchem/data/lb19758/lb19758-64/processing/database/soakDBDataFile.sqlite revision 1
 
 You should leave the services running int he console window.
 You can stop them any time by typing ^C. 

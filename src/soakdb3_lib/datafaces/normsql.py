@@ -10,6 +10,9 @@ from typing import Optional
 
 from dateutil.parser import ParserError, parse
 
+# Database manager.
+from dls_normsql.databases import Databases
+
 # Utilities.
 from dls_utilpack.callsign import callsign
 from dls_utilpack.require import require
@@ -19,9 +22,7 @@ from dls_utilpack.thing import Thing
 
 # Database constants.
 from soakdb3_api.databases.constants import PinBarcodeErrors, Tablenames
-
-# Database manager.
-from soakdb3_lib.databases.databases import Databases
+from soakdb3_api.databases.database_definition import DatabaseDefinition
 
 # Version for health response.
 from soakdb3_lib.version import version as soakdb3_lib_version
@@ -31,7 +32,7 @@ logger = logging.getLogger(__name__)
 thing_type = "soakdb3_lib.datafaces.aiosqlite"
 
 
-class Aiosqlite(Thing):
+class Normsql(Thing):
     """
     Implementation of dataface on top of underlying database API provider presumed to be sqlite.
     """
@@ -64,6 +65,8 @@ class Aiosqlite(Thing):
             self.__type_specific,
             "visitid_mappings",
         )
+
+        self.__database_definition_object = DatabaseDefinition()
 
         # Cache of database objects we have created.
         self.__cache = {}
@@ -106,7 +109,9 @@ class Aiosqlite(Thing):
 
             self.__cache_cvs_directories[visitid] = f"{visitid_path}/lab36"
 
-            database = Databases().build_object(dbspec)
+            database = Databases().build_object(
+                dbspec, self.__database_definition_object
+            )
             await database.connect()
 
             # Cache database connections by visitid.
