@@ -1,5 +1,5 @@
 # ********** Please don't edit this file!
-# ********** It has been generated automatically by dae_devops version 0.5.3.dev1+g36e9e1c.d20230523.
+# ********** It has been generated automatically by dae_devops version 0.5.3.
 # ********** For repository_name soakdb3
 
 # To get started with Dependabot version updates, you'll need to specify which
@@ -19,4 +19,4 @@ updates:
     schedule:
       interval: "weekly"
 
-# dae_devops_fingerprint 7e737a508027cc9682746bf87ac927c3
+# dae_devops_fingerprint 0f56118bd55142e0710b36f4ac80c196

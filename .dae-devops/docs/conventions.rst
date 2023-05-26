@@ -1,5 +1,5 @@
 .. # ********** Please don't edit this file!
-.. # ********** It has been generated automatically by dae_devops version 0.5.3.dev1+g36e9e1c.d20230523.
+.. # ********** It has been generated automatically by dae_devops version 0.5.3.
 .. # ********** For repository_name soakdb3
 
 Naming conventions
@@ -31,4 +31,4 @@ repository
     lowercase, hyphens
 
 
-.. # dae_devops_fingerprint 6453b898fcb14e4dd9868afc1f5f1bbb
+.. # dae_devops_fingerprint de902f373135c81a658a17ca32158297

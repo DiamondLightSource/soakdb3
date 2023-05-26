@@ -1,5 +1,5 @@
 .. # ********** Please don't edit this file!
-.. # ********** It has been generated automatically by dae_devops version 0.5.3.dev1+g36e9e1c.d20230523.
+.. # ********** It has been generated automatically by dae_devops version 0.5.3.
 .. # ********** For repository_name soakdb3
 
 Devops
@@ -44,4 +44,4 @@ Publishing (for the Diamond intranet)::
     
 The Diamond intranet commands are not used for production. The production packaging and publishing are handled in the GitHub Actions workflows mechanism.
 
-.. # dae_devops_fingerprint b8416adabeb5111a7b98ad394109a79c
+.. # dae_devops_fingerprint 643e7f13e98318c4428bcec7cbb50a96

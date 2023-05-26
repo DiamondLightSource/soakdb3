@@ -1,5 +1,5 @@
 .. # ********** Please don't edit this file!
-.. # ********** It has been generated automatically by dae_devops version 0.5.3.dev1+g36e9e1c.d20230523.
+.. # ********** It has been generated automatically by dae_devops version 0.5.3.
 .. # ********** For repository_name soakdb3
 
 Installing
@@ -39,4 +39,4 @@ You can check the version that has been installed by typing::
     $ soakdb3 --version
     $ soakdb3 --version-json
 
-.. # dae_devops_fingerprint 810142999a0b0ce82f84405d06045331
+.. # dae_devops_fingerprint c122d062e225aa06bbb8e80da0553fd7

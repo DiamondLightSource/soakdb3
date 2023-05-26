@@ -1,5 +1,5 @@
 .. # ********** Please don't edit this file!
-.. # ********** It has been generated automatically by dae_devops version 0.5.3.dev1+g36e9e1c.d20230523.
+.. # ********** It has been generated automatically by dae_devops version 0.5.3.
 .. # ********** For repository_name soakdb3
 
 Contributing to the project
@@ -38,4 +38,4 @@ should follow.
 
 .. _Developer Guide: https://diamondlightsource.github.io/soakdb3/main/developer/how-to/contribute.html
 
-.. # dae_devops_fingerprint 9ece2d6c151df46e92d82ccf45c9798d
+.. # dae_devops_fingerprint 9f9b8d29e13fc36a91cb18e92de3c255
