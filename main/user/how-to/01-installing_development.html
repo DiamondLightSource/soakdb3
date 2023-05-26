@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Installing &#8212; soakdb3 1.6.1.dev1+gc4057c3 documentation</title>
+    <title>Installing &#8212; soakdb3 1.6.1.dev10+g2c44931 documentation</title>
   
   
   
@@ -189,7 +189,7 @@ document.write(`
           
           
           
-          <a href="None/soakdb3" title="GitLab" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-gitlab"></i></span>
+          <a href="https://github.com/DiamondLightSource/soakdb3" title="GitLab" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-gitlab"></i></span>
             <label class="sr-only">GitLab</label></a>
         </li>
 </ul></div>
@@ -273,7 +273,7 @@ document.write(`
           
           
           
-          <a href="None/soakdb3" title="GitLab" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-gitlab"></i></span>
+          <a href="https://github.com/DiamondLightSource/soakdb3" title="GitLab" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-gitlab"></i></span>
             <label class="sr-only">GitLab</label></a>
         </li>
 </ul></div>
@@ -388,16 +388,15 @@ $ pip install --upgrade pip
 </pre></div>
 </div>
 <p>You can now use <code class="docutils literal notranslate"><span class="pre">pip</span></code> to install the library and its dependencies:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export PIP_FIND_LINKS=/dls_sw/apps/bxflow/artifacts
-$ python3 -m pip install soakdb3
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python3 -m pip install soakdb3
 </pre></div>
 </div>
 <p>If you require a feature that is not currently released you can also install
 from git:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python3 -m pip install git+None/soakdb3.git
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python3 -m pip install git+https://github.com/DiamondLightSource/soakdb3.git
 </pre></div>
 </div>
-<p>The library should now be installed and the commandline interface on your path.
+<p>The library should now be installed and the commandline should be available.
 You can check the version that has been installed by typing:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ soakdb3 --version
 $ soakdb3 --version-json

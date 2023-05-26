@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Testing &#8212; soakdb3 1.6.1.dev1+gc4057c3 documentation</title>
+    <title>Testing &#8212; soakdb3 1.6.1.dev10+g2c44931 documentation</title>
   
   
   
@@ -189,7 +189,7 @@ document.write(`
           
           
           
-          <a href="None/soakdb3" title="GitLab" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-gitlab"></i></span>
+          <a href="https://github.com/DiamondLightSource/soakdb3" title="GitLab" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-gitlab"></i></span>
             <label class="sr-only">GitLab</label></a>
         </li>
 </ul></div>
@@ -273,7 +273,7 @@ document.write(`
           
           
           
-          <a href="None/soakdb3" title="GitLab" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-gitlab"></i></span>
+          <a href="https://github.com/DiamondLightSource/soakdb3" title="GitLab" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-gitlab"></i></span>
             <label class="sr-only">GitLab</label></a>
         </li>
 </ul></div>
@@ -374,21 +374,17 @@ document.write(`
 <p>The package uses pytest for unit testing.</p>
 <p>If you want to run the tests, first get a copy of the code per the instructions in the Developing section.</p>
 <p>Then you can run all tests by:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pytest
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ tox -q -e pytest
 </pre></div>
 </div>
-<p>Or this, which is the command used by the CI runner.</p>
-<blockquote>
-<div><p>$ make -f .dae-devops/Makefile validate_pytest</p>
-</div></blockquote>
 <p>To run a single test you can do:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pytest tests/the_test_you_want.py
 </pre></div>
 </div>
 <p>If you want to see more output of the test while it’s running you can do:</p>
-<blockquote>
-<div><p>$ pytest -sv -ra –tb=line tests/the_test_you_want.py</p>
-</div></blockquote>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pytest -sv -ra --tb=line tests/the_test_you_want.py
+</pre></div>
+</div>
 <p>Each test will write files into its own directory:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">soakdb3</span><span class="o">/</span><span class="n">tests</span><span class="o">/....</span>
 </pre></div>
