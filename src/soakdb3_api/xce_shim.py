@@ -1,5 +1,4 @@
-    
-class Cursor():
+class Cursor:
     def __init__(self, data_source_file):
         self.__data_source_file = data_source_file
 
@@ -11,8 +10,9 @@ class Cursor():
 
     def description(self):
         pass
-    
-class Connection():
+
+
+class Connection:
     def __init__(self, data_source_file):
         self.__data_source_file = data_source_file
 
@@ -23,6 +23,7 @@ class Connection():
 
     def cursor(self):
         return Cursor(self.__data_source_file)
+
 
 @staticmethod
 def connect(data_source_file):
