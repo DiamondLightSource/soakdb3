@@ -25,6 +25,5 @@ class Connection:
         return Cursor(self.__data_source_file)
 
 
-@staticmethod
 def connect(data_source_file):
     return Connection(data_source_file)
